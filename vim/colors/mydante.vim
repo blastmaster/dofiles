@@ -38,8 +38,13 @@ hi ModeMsg	term=bold cterm=bold gui=bold
 hi Question	term=standout ctermfg=green gui=bold guifg=olivedrab1
 hi WarningMsg	term=standout ctermfg=red gui=bold guifg=red3
 hi WildMenu     term=standout ctermfg=black ctermbg=34 guifg=black guibg=34
-hi Folded	term=standout ctermfg=blue ctermbg=white guifg=royalblue1 guibg=white
-hi FoldColumn	term=standout ctermfg=blue ctermbg=white guifg=royalblue3 guibg=white
+
+" hi Folded    term=standout ctermfg=blue ctermbg=white guifg=royalblue1 guibg=white
+" hi FoldColumn	   term=standout ctermfg=blue ctermbg=white guifg=royalblue3 guibg=white
+
+hi Folded ctermfg=62 ctermbg=234
+hi FoldColumn ctermfg=62 ctermbg=234
+
 hi DiffAdd	term=bold ctermbg=blue guibg=royalblue2
 hi DiffChange	term=bold ctermbg=darkmagenta guibg=maroon
 hi DiffDelete	term=bold cterm=bold ctermfg=lightblue ctermbg=cyan gui=bold guifg=lightblue guibg=cyan4
@@ -54,7 +59,8 @@ hi StatusLineNC guifg=#000000   guibg=#696969   gui=NONE
 
 hi StatusLineNC	term=reverse cterm=reverse gui=reverse guifg=gray40
 
-hi VertSplit	term=reverse cterm=reverse gui=bold,reverse guifg=gray40
+" hi VertSplit	term=reverse cterm=reverse gui=bold,reverse guifg=gray40
+hi VertSplit ctermfg=233 ctermbg=63 cterm=NONE
 hi Title	term=bold ctermfg=magenta gui=bold guifg=aquamarine
 
 " {{{
