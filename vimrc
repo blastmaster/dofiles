@@ -51,6 +51,8 @@ set smartcase
 
 " hide mouse while typing
 set mousehide
+" enabling mouse in text terminal
+set mouse=a
 " no noise
 set noerrorbells
 " tab completion
@@ -116,7 +118,9 @@ map <F12> i#! /usr/bin/perl<ESC>o
 map <F10> :noh<CR>
 " toggle options
 map <F2> :Vexplore!<CR>
-vmap ,f :! ~/.bin/postfix_toggle.pl<CR>
+let mapleader = ','
+vmap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
+noremap <leader>, :NERDTreeToggle<CR>
 
 " show whitespace at end of line
 hi ExtraWhitespace ctermbg=gray guibg=red
@@ -136,6 +140,20 @@ nmap <F6> :if &showtabline == 1<Bar>set showtabline=0<Bar>else<Bar>set showtabli
 nmap <F5> :set number!<CR>
 " toggle cursorline
 nmap <F3> :set cursorline!<CR>
+nmap <F7> :call Prove()<CR>
+nmap <F8> :call Compile()<CR>
+
+" resize horizontal split
+nmap + <C-w>+
+nmap _ <C-w>-
+" resize vertical split
+"nmap > <C->>
+"nmap < <C-><
+" go to next split
+nmap <leader>w <C-w>w
+nmap <leader>t :TlistToggle<CR>
+nmap <leader>n :tabnext<CR>
+nmap <leader>p :tabprev<CR>
 
 " toggle CursorLineNr highliting
 autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15
@@ -143,6 +161,21 @@ autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154
 
 " save last cursor position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "normal! g'\"" | endif
+
+" execute perl test from the editor
+function! Prove()
+    if ! exists("testfile")
+        let testfile = "t/*.t"
+    endif
+    let s:params = "-lrc"
+    execute "!prove --timer " . s:params . " " . testfile
+endfunction
+
+" call the perl interpreter from the editor
+function! Compile()
+    let compilefile = expand("%")
+    execute "!perl -c -Ilib " . compilefile
+endfunction
 
 " autoload and autosave sessions.
 
