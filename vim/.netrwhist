@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/blastmaster/development/perl'
+let g:netrw_dirhist_2='/home/blastmaster/.dzil/profiles'
+let g:netrw_dirhist_3='/home/blastmaster/.vim/bundle/taglist.vim/plugin'

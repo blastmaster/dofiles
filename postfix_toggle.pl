@@ -5,6 +5,8 @@ use warnings;
 
 use feature "say";
 
+# http://babyl.dyndns.org/techblog/entry/statement-toggler
+
 local $/;
 
 my $snippet = <>;

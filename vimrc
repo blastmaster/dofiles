@@ -49,6 +49,10 @@ let g:tex_flavor="pdftex"
 set ignorecase
 set smartcase
 
+"set listchars=tab:▸\ ,extends:#,nbsp:.,trail:.
+
+let mojo_highlight_data = 1
+
 " hide mouse while typing
 set mousehide
 " enabling mouse in text terminal
@@ -214,6 +218,19 @@ EOD
     endif
 endfunction
 
+function! DeleteSession()
+    if argc() == 0
+        perl << EOD
+        use Digest::MD5 qw(md5_hex);
+        use Cwd;
+        my $session_md5_hash = md5_hex(cwd());
+        my $session_path = "$ENV{HOME}/.vim/sessions/$session_md5_hash.session";
+        unlink($session_path);
+EOD
+    endif
+endfunction
+
+amenu Sessions.&Delete :call DeleteSession()<CR>
 " disable cursorline if current file ist *.tex
 autocmd BufEnter *.tex set nocursorline
 autocmd BufEnter *.t set filetype=perl
