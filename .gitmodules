@@ -1,9 +1,18 @@
-[submodule "bundle/nerdtree"]
-    path = bundle/nerdtree
-    url = git://github.com/scrooloose/nerdtree.git
-[submodule "bundle/taglist"]
-    path = bundle/taglist
-    url = git://github.com:vim-scripts/taglist.vim.git
-[submodule "bundle/mojo"]
-    path = bundle/mojo
-    url = git://github.com:yko/mojo.vim.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "vim/bundle/mojo.vim"]
+	path = vim/bundle/mojo.vim
+	url = git@github.com:yko/mojo.vim.git
+[submodule "vim/bundle/tcomment_vim"]
+	path = vim/bundle/tcomment_vim
+	url = git@github.com:tomtom/tcomment_vim.git
+[submodule "vim/bundle/taglist.vim"]
+	path = vim/bundle/taglist.vim
+	url = git@github.com:vim-scripts/taglist.vim.git
+[submodule "vim/bundle/vim-perl"]
+	path = vim/bundle/vim-perl
+	url = git@github.com:vim-perl/vim-perl.git
+[submodule "vim/bundle/perl-vim-mxd"]
+	path = vim/bundle/perl-vim-mxd
+	url = git@github.com:rkitover/perl-vim-mxd.git
