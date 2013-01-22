@@ -161,6 +161,9 @@ nmap <leader>t :TlistToggle<CR>
 nmap <leader>n :tabnext<CR>
 nmap <leader>p :tabprev<CR>
 
+" some abbreviations
+iab dp use Data::Printer;
+
 " toggle CursorLineNr highliting
 autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15
 autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154
