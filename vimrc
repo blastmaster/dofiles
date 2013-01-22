@@ -66,6 +66,8 @@ set wildmode=longest:full
 set laststatus=2
 " statusline format, see :help statusline for details
 set statusline=%F%m%r%h%w\ %y%=[Buffer\:\ %n][Lines\:\ %l\/%L][Column\:\ %c][%p%%]
+"set minimum distance to buttom
+set scrolloff=7
 
 call pathogen#infect()
 
@@ -171,7 +173,7 @@ function! Prove()
     if ! exists("testfile")
         let testfile = "t/*.t"
     endif
-    let s:params = "-lrc"
+    let s:params = "-lrc -v"
     execute "!prove --timer " . s:params . " " . testfile
 endfunction
 
