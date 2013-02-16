@@ -60,7 +60,7 @@ hi StatusLineNC guifg=#000000   guibg=#696969   gui=NONE
 hi StatusLineNC	term=reverse cterm=reverse gui=reverse guifg=gray40
 
 " hi VertSplit	term=reverse cterm=reverse gui=bold,reverse guifg=gray40
-hi VertSplit ctermfg=233 ctermbg=63 cterm=NONE
+hi VertSplit ctermfg=238 ctermbg=NONE cterm=NONE
 hi Title	term=bold ctermfg=magenta gui=bold guifg=aquamarine
 
 " {{{
