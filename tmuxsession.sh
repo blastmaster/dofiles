@@ -74,15 +74,3 @@ function choose_session()
         awk -F':' '{print $1}' )
     attach_session $target
 }
-
-if ! tmux -q has-session; then
-    new_session $1
-else
-    while getopts a:nc opt; do
-        case $opt in
-            a) shift; attach_session "$@";;
-            n) shift; new_session "$@";;
-            c) choose_session;;
-        esac
-    done
-fi
