@@ -2,8 +2,6 @@
 
 source ~/.bin/tmuxsession.sh
 
-set -x
-
 case $1 in
     -a) shift; attach_session "$@";;
     -n) shift; new_session "$@";;
