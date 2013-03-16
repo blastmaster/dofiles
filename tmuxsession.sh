@@ -2,21 +2,17 @@
 
 # script to manage my tmux session
 
-
-# declare a default session name which is easy to increment
-default_sname="0x01"
-
 # declaring some global variables
 # a list of all sessions
 # the length of the list
 declare -a slist=( $(tmux ls -F '#{session_name}') )
-declare -i len=${#slist[@]}
+declare -i len=${#slist[@]:-2}
 
 # works with defaults less then 10
 function new_session()
 {
     local i=1
-    if [[ $1 ]]; then
+    if [[ ! -z $1 ]]; then
         tmux new-session -s $1
         return 0
     fi
@@ -27,11 +23,16 @@ function new_session()
 function new_session_name()
 {
     local i=1
+    if ! tmux has-session -t 0x0$i 2>/dev/null; then
+        echo "0x0$i"
+        return
+    fi
     for session in ${slist[@]}; do
         if [[ $session == 0x?? ]]; then
             let i=i+1
             if ! tmux has-session -t 0x0$i 2>/dev/null; then
                echo "0x0$i"
+               return
             fi
         fi
     done
