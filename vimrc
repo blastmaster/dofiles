@@ -6,6 +6,8 @@
 
 " be IMproved
 set nocompatible
+" utf-8
+set encoding=utf-8
 " indent handling
 set autoindent
 " 80 character textwidth
@@ -68,6 +70,10 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ %y%=[Buffer\:\ %n][Lines\:\ %l\/%L][Column\:\ %c][%p%%]
 "set minimum distance to buttom
 set scrolloff=7
+
+" split behaivor
+set splitbelow
+set splitright
 
 call pathogen#infect()
 
@@ -161,7 +167,16 @@ nmap <leader>t :TlistToggle<CR>
 nmap <leader>n :tabnext<CR>
 nmap <leader>p :tabprev<CR>
 
-" some abbreviations
+" easier split naviagation
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+
+" toggle spell checking
+nmap <leader>sd :set spell! spelllang=de<CR>
+nmap <leader>se :set spell! spelllang=en<CR>
+
 iab dp use Data::Printer;
 
 " toggle CursorLineNr highliting
