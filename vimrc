@@ -129,10 +129,13 @@ map <F12> i#! /usr/bin/perl<ESC>o
 
 map <F10> :noh<CR>
 " toggle options
-map <F2> :Vexplore!<CR>
 let mapleader = ','
 vmap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
 noremap <leader>, :NERDTreeToggle<CR>
+
+let NERDTreeWinPos = 'right'
+let NERDTreeDirArrows = 1
+let NERDTreeCascadeOpenSingelChildDir = 1
 
 " show whitespace at end of line
 hi ExtraWhitespace ctermbg=gray guibg=red
@@ -154,6 +157,7 @@ nmap <F5> :set number!<CR>
 nmap <F3> :set cursorline!<CR>
 nmap <F7> :call Prove()<CR>
 nmap <F8> :call Compile()<CR>
+map <C-h> :new %:p:r.h
 
 " resize horizontal split
 nmap + <C-w>+
@@ -163,9 +167,18 @@ nmap _ <C-w>-
 "nmap < <C-><
 " go to next split
 nmap <leader>w <C-w>w
-nmap <leader>t :TlistToggle<CR>
-nmap <leader>n :tabnext<CR>
-nmap <leader>p :tabprev<CR>
+
+"setting tagbar
+let g:tagbar_left = 1
+"let g:tagbar_width = 30
+let g:tagbar_indent = 1
+let g:tagbar_show_linenumbers = 2
+let g:tagbar_expand = 1
+let g:tagbar_singleklick = 1
+nmap <leader>t :TagbarToggle<CR>
+" nmap <leader>t :TlistToggle<CR>
+" nmap <leader>n :tabnext<CR>
+" nmap <leader>p :tabprev<CR>
 
 " easier split naviagation
 nnoremap <C-H> <C-W><C-H>
@@ -185,6 +198,9 @@ autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154
 
 " save last cursor position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "normal! g'\"" | endif
+
+" close vim if nerdtree is the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " execute perl test from the editor
 function! Prove()
