@@ -16,3 +16,12 @@
 [submodule "vim/bundle/perl-vim-mxd"]
 	path = vim/bundle/perl-vim-mxd
 	url = git@github.com:rkitover/perl-vim-mxd.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git@github.com:majutsushi/tagbar.git
+[submodule "vim/bundle/vim-l9"]
+	path = vim/bundle/vim-l9
+	url = git@github.com:vim-scripts/L9.git
+[submodule "vim/bundle/FuzzyFinder"]
+	path = vim/bundle/FuzzyFinder
+	url = git@github.com:vim-scripts/FuzzyFinder.git
