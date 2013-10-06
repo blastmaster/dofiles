@@ -1,10 +1,29 @@
 #! /bin/bash
 
-source ~/.bin/tmuxsession.sh
+function help()
+{
+    cat <<end
+    tmx [option] [session-name]
+
+    -a attachs a session within a new session
+    -n creates complete new session
+    -h show this help message
+    -c let you choose a session to attach
+    in default case a new session is created
+end
+}
+
+if [[ -x ~/.bin/tmuxsession.sh ]]; then
+    source ~/.bin/tmuxsession.sh
+else
+    echo "tmuxsession.sh cannot found but is necessary"
+    exit 1
+fi
 
 case $1 in
     -a) shift; attach_session "$@";;
     -n) shift; new_session "$@";;
     -c) choose_session;;
+    -h) help;;
      *) new_session "$@";;
 esac
