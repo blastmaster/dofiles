@@ -42,6 +42,8 @@ set ruler
 set nojoinspaces
 
 set cpo+=$
+" do not break lines if window to small
+set nowrap
 " left/right movements don't wrap
 set whichwrap=""
 " deactivate modlines
