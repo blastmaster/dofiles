@@ -35,6 +35,8 @@ set showmatch
 set ruler
 set nojoinspaces
 set cpo+=$
+" do not break lines if window to small
+set nowrap
 set whichwrap=""
 set modelines=0
 " set linenumbers by default
