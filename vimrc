@@ -17,11 +17,13 @@ set t_Co=256
 
 set backspace=indent,eol,start
 " spaces instead of tabs
-set expandtab
+set noexpandtab
 " 4 spaces for each tab
 set tabstop=4
 " 4 spaces for indentation
 set shiftwidth=4
+" indicates a fast terminal connection
+set ttyfast
 
 set shiftround
 set matchpairs+=<:>
@@ -31,11 +33,18 @@ set showcmd
 set showmode
 
 set showmatch
+" which directory to use for the file browser
+set browsedir=buffer
+
 " show current position
 set ruler
+" insert spaces after punctuation when using join commands
 set nojoinspaces
+
 set cpo+=$
+" left/right movements don't wrap
 set whichwrap=""
+" deactivate modlines
 set modelines=0
 " set linenumbers by default
 set number
@@ -43,15 +52,19 @@ set number
 set hlsearch
 " C indent
 set cin
+" setting program used for the :grep command
 set grepprg=grep\ -nH\ $*
-"set spelllang=de_de spell
+" latex suite option
 let g:tex_flavor="pdftex"
+" be case insensetive
+set ignorecase
 
 " search options
-set ignorecase
+" ignore case for search commands
 set smartcase
-
-"set listchars=tab:▸\ ,extends:#,nbsp:.,trail:.
+" highlight whitespaces
+set list
+set listchars=tab:▸\ ,extends:#,nbsp:.,trail:.
 
 let mojo_highlight_data = 1
 
@@ -72,9 +85,15 @@ set statusline=%F%m%r%h%w\ %y%=[Buffer\:\ %n][Lines\:\ %l\/%L][Column\:\ %c][%p%
 set scrolloff=7
 
 " split behaivor
+" open new window below the current (horizontal split)
 set splitbelow
+" open new window right of the current (vertical split)
 set splitright
 
+" activate omni completion, set completion function
+set omnifunc=syntaxcomplete#Complete
+
+" call pathogen to load my plugins
 call pathogen#infect()
 
 " highlight active line
@@ -170,10 +189,8 @@ nmap <leader>w <C-w>w
 
 "setting tagbar
 let g:tagbar_left = 1
-"let g:tagbar_width = 30
+let g:tagbar_width = 30
 let g:tagbar_indent = 1
-let g:tagbar_show_linenumbers = 2
-let g:tagbar_expand = 1
 let g:tagbar_singleklick = 1
 nmap <leader>t :TagbarToggle<CR>
 " nmap <leader>t :TlistToggle<CR>
@@ -189,12 +206,16 @@ nnoremap <C-L> <C-W><C-L>
 " toggle spell checking
 nmap <leader>sd :set spell! spelllang=de<CR>
 nmap <leader>se :set spell! spelllang=en<CR>
+nnoremap <leader>l :FufFile <CR>
+nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>ft :FufTag<CR>
+
 
 iab dp use Data::Printer;
 
 " toggle CursorLineNr highliting
-autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15
-autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154
+autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15 guifg=#FFFFFF guibg=#046491
+autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154 guifg=#81C725 guibg=#7C7C7C
 
 " save last cursor position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "normal! g'\"" | endif
@@ -219,8 +240,8 @@ endfunction
 
 " autoload and autosave sessions.
 
-autocmd VimEnter * call AutoLoadSession()
-autocmd VimLeave * call AutoSaveSession()
+" autocmd VimEnter * call AutoLoadSession()
+" autocmd VimLeave * call AutoSaveSession()
 
 function! AutoLoadSession()
      if argc() == 0
