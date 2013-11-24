@@ -1,46 +1,66 @@
 " ~/.vimrc for configure the vim-terminal-editor
 
-"
-" Basics
-"
+" call pathogen to load my plugins
+call pathogen#infect()
 
+"
+" Basic Options ----------------------------------------------------------------
+"
 " be IMproved
 set nocompatible
 " utf-8
 set encoding=utf-8
-" indent handling
+set fileencoding=utf-8
+" indent automatically
 set autoindent
 " 80 character textwidth
 set textwidth=80
 " enable 256 colors
 set t_Co=256
+" don't try to highlight lines longer than 800 characters
+set synmaxcol=800
 
 set backspace=indent,eol,start
-" spaces instead of tabs
-set noexpandtab
+" replace tabs with spaces
+" NOTE: while expandtab is set listchars for tabs dosen't work
+set expandtab
 " 4 spaces for each tab
 set tabstop=4
 " 4 spaces for indentation
 set shiftwidth=4
+" tabs that replaced with spaces behave like tabs
+set softtabstop=4
 " indicates a fast terminal connection
 set ttyfast
-
+" hide buffer when it is abandoned
+set hidden
+" set size of command and search pattern history
+set history=1000
+" round the indent to a multiple of shiftwidth
 set shiftround
-set matchpairs+=<:>
+" jump between pairs with '%'
+" TODO: =:; makes only sense in special filetypes
+" use au FileType c,cpp,java,perl set matchpairs+==:;
+set matchpairs+=<:>,=:;
+
+" see :help fo-table for details
+set formatoptions+=qrnlj
+
+set matchtime=3
 " show command which is being typed
 set showcmd
 " show my current mode
 set showmode
-
+" jumb to bracket if one is insetered
 set showmatch
-" which directory to use for the file browser
+" which directory to use for the file browser (current buffer)
 set browsedir=buffer
 
 " show current position
 set ruler
 " insert spaces after punctuation when using join commands
 set nojoinspaces
-
+" setting vi-compatible behaivour for the $ character
 set cpo+=$
 " do not break lines if window to small
 set nowrap
@@ -61,24 +81,44 @@ let g:tex_flavor="pdftex"
 " be case insensetive
 set ignorecase
 
+set autowrite	" write contents of the file if it has been modified
+set autoread	" read contents of the fiel if it has been modified out side of vim
 " search options
 " ignore case for search commands
 set smartcase
 " highlight whitespaces
 set list
 set listchars=tab:▸\ ,extends:#,nbsp:.,trail:.
+" NOTE: wrap is currently turned off
+set showbreak=↪ " single-cell character at start of lines that have been wrapped
 
-let mojo_highlight_data = 1
+" set max tab number
+set tabpagemax=100
 
-" hide mouse while typing
+" hide mouse while typing (works only in the gui version)
 set mousehide
 " enabling mouse in text terminal
 set mouse=a
 " no noise
 set noerrorbells
-" tab completion
+" wildmenu completion
 set wildmenu
 set wildmode=longest:full
+set wildignore+=.git,.svn,.hg						" Version Control
+set wildignore+=*.aux,*.toc,*.toc					"LateX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg		"binary images
+set wildignore+=*.o,*.so,*.class					"compiled object files
+
+" timeouts
+" timeout only for for keycodes after 10 milliseconds
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+" backups
+set nobackup
+set noswapfile		" it's the 21th century, we use version control for this
+
 " always show a statusline
 set laststatus=2
 " statusline format, see :help statusline for details
@@ -91,17 +131,13 @@ set scrolloff=7
 set splitbelow
 " open new window right of the current (vertical split)
 set splitright
+" highlight active line
+set cursorline
 
 " activate omni completion, set completion function
 set omnifunc=syntaxcomplete#Complete
 
-" call pathogen to load my plugins
-call pathogen#infect()
-
-" highlight active line
-set cursorline
-" set max tab number
-set tabpagemax=100
+let mojo_highlight_data = 1
 
 " customize my tabline
 function! MyTabLine()
@@ -139,16 +175,87 @@ endfunction
 
 set tabline=%!MyTabLine()
 
+" first grouping matches to greedy!
+let s:fontpattern = '^\(.*\)\([1-9][0-9]*\)$'
+" let s:fontpattern = '^\([:alpha:][:space:]\)\([1-9][0-9]*\)$'
+let s:minfontsize = 6
+let s:maxfontsize = 10
+
+function! UpdateFontSize(n)
+    if has('gui_running')
+        " let save_cpo = &cpo
+        " set &cpo&vim
+        let restorelist = [ &lines, &columns, &cmdheight ]
+        let winrestore = [ &winheight, &winwidth, &cmdheight ]
+        let fontname = substitute(&guifont, s:fontpattern, '\1', '')
+        let cursize = substitute(&guifont, s:fontpattern, '\2', '')
+        let newsize = cursize + a:n
+        if (newsize <= s:maxfontsize) && (newsize >= s:minfontsize)
+            let newfont = fontname . newsize
+            let &guifont = newfont
+            " let [ &lines, &columns, &cmdheight ] = [9999, 9999, 1]
+            let [ &lines, &columns, &cmdheight ] = restorelist
+            let [ &winheight, &winwidth, &cmdheight ] = winrestore
+            redraw
+        endif
+        " let &cpo = save_cpo
+    else
+        echoerr "You need to run gVim to use this function!"
+    endif
+endfunction
+
+function! s:IncrementFontSize()
+    call UpdateFontSize(1)
+endfunction
+
+function! s:DecrementFontSize()
+    call UpdateFontSize(-1)
+endfunction
+
+command! IncrementFontSize :call <SID>IncrementFontSize()
+command! DecrementFontSize :call <SID>DecrementFontSize()
+
+noremap <F8> :IncrementFontSize<CR>
+noremap <F9> :DecrementFontSize<CR>
+
+" noremap <CR>+ :call IncrementFontSize()
+" noremap <CR>- :call DecrementFontSize()
+
 " loading template with according file ending in new buffer
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
 colorscheme mydante
 
+" Mappings ---------------------------------------------------------------------
 " older maps
 map <F11> i#! /bin/bash<ESC>o
 map <F12> i#! /usr/bin/perl<ESC>o
+map <F10> :noh<CR> " turn off search highlighting
+" setting corresponding paranthesis automatica and set cursor inside
+" TODO: These mappings should only happens in code files
+imap ( ()<Left>
+imap [ []<Left>
+" imap { {<CR><CR>}<UP>
+" when jumping between matches in the middle of the window
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" nnoremap n nzz
+" nnoremap N Nzz
 
-map <F10> :noh<CR>
+" same when jumping through changelist
+nnoremap g; g;zz
+nnoremap g, g,zz
+
+" Sort lines
+nnoremap <leader>s vip:!sort<CR>
+vnoremap <leader>s :!sort<CR>
+
+" uppercase
+inoremap <c-u> <esc>mzgUiw`za
+
+" don't move on *
+nnoremap * *<c-o>
+
 " toggle options
 let mapleader = ','
 vmap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
@@ -157,6 +264,20 @@ noremap <leader>, :NERDTreeToggle<CR>
 let NERDTreeWinPos = 'right'
 let NERDTreeDirArrows = 1
 let NERDTreeCascadeOpenSingelChildDir = 1
+
+" clear trailing whitespaces
+nnoremap <leader>. :%s/\s\+$//<CR>:let @/=''<CR>
+
+" align text
+nnoremap <leader>al :left<CR>
+nnoremap <leader>ar :right<CR>
+nnoremap <leader>ac :center<CR>
+vnoremap <leader>al :left<CR>
+vnoremap <leader>ar :right<CR>
+vnoremap <leader>ac :center<CR>
+
+" selecting visual current line without indentation
+nnoremap vv ^vg_
 
 " show whitespace at end of line
 hi ExtraWhitespace ctermbg=gray guibg=red
@@ -177,7 +298,7 @@ nmap <F5> :set number!<CR>
 " toggle cursorline
 nmap <F3> :set cursorline!<CR>
 nmap <F7> :call Prove()<CR>
-nmap <F8> :call Compile()<CR>
+" nmap <F8> :call Compile()<CR>
 map <C-h> :new %:p:r.h
 
 " resize horizontal split
@@ -212,12 +333,17 @@ nnoremap <leader>l :FufFile <CR>
 nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>ft :FufTag<CR>
 
-
+" Abbreviations
 iab dp use Data::Printer;
 
-" toggle CursorLineNr highliting
+" Autocommands -----------------------------------------------------------------
+" toggle CursorLineNr highliting in insert mode
 autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15 guifg=#FFFFFF guibg=#046491
 autocmd InsertLeave * hi CursorLineNr ctermbg=238 ctermfg=154 guifg=#81C725 guibg=#7C7C7C
+" resize splits when window is resized
+autocmd VimResized * exe "normal! \<C-W>="
+" save automatically when losing focus
+autocmd FocusLost * :wa
 
 " save last cursor position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "normal! g'\"" | endif
