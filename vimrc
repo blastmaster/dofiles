@@ -175,30 +175,32 @@ endfunction
 
 set tabline=%!MyTabLine()
 
-" first grouping matches to greedy!
-let s:fontpattern = '^\(.*\)\([1-9][0-9]*\)$'
-" let s:fontpattern = '^\([:alpha:][:space:]\)\([1-9][0-9]*\)$'
+let s:fontpattern = '^\([^0-9]\+\)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
-let s:maxfontsize = 10
+let s:maxfontsize = 16
+let s:defaultfontsize = substitute(&guifont, s:fontpattern, '\2', '')
 
 function! UpdateFontSize(n)
     if has('gui_running')
-        " let save_cpo = &cpo
-        " set &cpo&vim
+        let save_cpo = &cpo
+        set cpo&vim
         let restorelist = [ &lines, &columns, &cmdheight ]
         let winrestore = [ &winheight, &winwidth, &cmdheight ]
         let fontname = substitute(&guifont, s:fontpattern, '\1', '')
-        let cursize = substitute(&guifont, s:fontpattern, '\2', '')
-        let newsize = cursize + a:n
+        if (a:n == 0)
+            echo "default size" s:defaultfontsize
+            let newsize = s:defaultfontsize
+        else
+            let cursize = substitute(&guifont, s:fontpattern, '\2', '')
+            let newsize = cursize + a:n
+        endif
         if (newsize <= s:maxfontsize) && (newsize >= s:minfontsize)
             let newfont = fontname . newsize
             let &guifont = newfont
-            " let [ &lines, &columns, &cmdheight ] = [9999, 9999, 1]
             let [ &lines, &columns, &cmdheight ] = restorelist
             let [ &winheight, &winwidth, &cmdheight ] = winrestore
-            redraw
         endif
-        " let &cpo = save_cpo
+        let &cpo = save_cpo
     else
         echoerr "You need to run gVim to use this function!"
     endif
@@ -212,14 +214,17 @@ function! s:DecrementFontSize()
     call UpdateFontSize(-1)
 endfunction
 
+function! s:DefaultFontSize()
+    call UpdateFontSize(0)
+endfunction
+
 command! IncrementFontSize :call <SID>IncrementFontSize()
 command! DecrementFontSize :call <SID>DecrementFontSize()
+command! DefaultFontSize   :call <SID>DefaultFontSize()
 
-noremap <F8> :IncrementFontSize<CR>
-noremap <F9> :DecrementFontSize<CR>
-
-" noremap <CR>+ :call IncrementFontSize()
-" noremap <CR>- :call DecrementFontSize()
+noremap <C-Up> :IncrementFontSize<CR>
+noremap <C-Down> :DecrementFontSize<CR>
+noremap <C-Left>   :DefaultFontSize<CR>
 
 " loading template with according file ending in new buffer
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
