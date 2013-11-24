@@ -6,76 +6,98 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme Option:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"hi clear
+set background=dark
+
+hi clear
+
 if exists("syntax on")
 	syntax reset
 endif
+
 let g:colors_name = "mydante"
 
-" General colors
-hi Normal   ctermfg=gray    guifg=white     guibg=black
+" {{{ Basics
+hi Normal		ctermfg=gray	guifg=#A3A3A3	guibg=#333333
 
-hi Directory	term=bold   ctermfg=blue  guifg=royalblue
+hi Directory	cterm=bold		ctermfg=blue    guifg=#5785bb guibg=bg  gui=bold
 
-hi ErrorMsg	term=standout ctermfg=white ctermbg=red guifg=white guibg=red3
+hi ErrorMsg		cterm=standout	ctermfg=white	ctermbg=red		guifg=#FFFFFF	guibg=#BF0303
 
-hi NonText	term=bold ctermfg=darkgray guibg=gray3 guifg=gray20
+hi NonText		cterm=bold		ctermfg=darkgray	guibg=#1A1A1A	guifg=#888888
 
-hi SpecialKey	term=bold ctermfg=darkgray guifg=gray30
+hi SpecialKey	term=bold       ctermfg=darkgray     guifg=gray30
 
-hi LineNr	ctermfg=darkgray guifg=ivory4 guibg=gray4
+hi LineNr		ctermfg=darkgray guifg=#3B3B3B guibg=#151515
 
-hi IncSearch	term=reverse cterm=reverse gui=reverse,bold guifg=darkgoldenrod2
+hi IncSearch	term=reverse cterm=reverse gui=bold guifg=#3d3d3d guibg=#3D3D3D
 
-hi Search	term=reverse ctermfg=black ctermbg=yellow guifg=gray10 guibg=gold2
+hi Search		term=reverse ctermfg=black ctermbg=yellow   guifg=#3d3d3d guibg=#3d3d3d
 
+" }}}
 "hi Visual	term=bold,reverse cterm=bold,reverse ctermfg=gray ctermbg=black gui=bold,reverse guifg=gray40 guibg=black
 
 "hi VisualNOS	term=bold cterm=bold gui=bold
 
-hi MoreMsg	term=bold ctermfg=green gui=bold guifg=olivedrab1
-hi ModeMsg	term=bold cterm=bold gui=bold
-hi Question	term=standout ctermfg=green gui=bold guifg=olivedrab1
-hi WarningMsg	term=standout ctermfg=red gui=bold guifg=red3
-hi WildMenu     term=standout ctermfg=black ctermbg=34 guifg=black guibg=34
+hi MoreMsg	    term=bold       ctermfg=green   gui=bold    guifg=olivedrab1
+hi ModeMsg	    term=bold       cterm=bold      gui=bold
+hi Question	    term=standout   ctermfg=green   gui=bold    guifg=olivedrab1
+hi WarningMsg	term=standout   ctermfg=red     gui=bold    guifg=red3
 
-" hi Folded    term=standout ctermfg=blue ctermbg=white guifg=royalblue1 guibg=white
-" hi FoldColumn	   term=standout ctermfg=blue ctermbg=white guifg=royalblue3 guibg=white
+hi WildMenu     ctermfg=black   ctermbg=34  cterm=bold  guifg=black guibg=#006C00   gui=bold
 
-hi Folded ctermfg=62 ctermbg=234
-hi FoldColumn ctermfg=62 ctermbg=234
+" {{{ Foldings
+hi Folded       ctermfg=62  ctermbg=234 guifg=#5785bb   guibg=bg    gui=bold
+hi FoldColumn   ctermfg=62  ctermbg=234 guifg=#5785bb   guibg=bg    gui=bold
+" }}}
 
-hi DiffAdd	term=bold ctermbg=blue guibg=royalblue2
-hi DiffChange	term=bold ctermbg=darkmagenta guibg=maroon
-hi DiffDelete	term=bold cterm=bold ctermfg=lightblue ctermbg=cyan gui=bold guifg=lightblue guibg=cyan4
-hi DiffText	term=reverse cterm=bold ctermbg=red gui=bold guibg=red3
+" {{{ Diff
+hi DiffAdd	    ctermbg=blue        guibg=royalblue2
+hi DiffChange	ctermbg=darkmagenta guibg=maroon
+hi DiffDelete	cterm=bold  ctermfg=lightblue ctermbg=cyan guifg=lightblue guibg=cyan4 gui=bold
+hi DiffText	    cterm=bold  ctermbg=red guibg=red3 gui=bold
+" }}}
+
 hi Cursor	guifg=bg guibg=fg
 hi lCursor	guifg=bg guibg=fg
 
+" {{{ StatusLine
 hi StatusLine   guifg=#000000  guibg=#696969    gui=NONE
             \   ctermfg=28     ctermbg=233      cterm=bold
 hi StatusLineNC guifg=#000000   guibg=#696969   gui=NONE
             \   ctermfg=black   ctermbg=238     cterm=bold
 
 hi StatusLineNC	term=reverse cterm=reverse gui=reverse guifg=gray40
+" }}}
 
-" hi VertSplit	term=reverse cterm=reverse gui=bold,reverse guifg=gray40
+
+" {{{ Pmenu Completion
+hi Pmenu         ctermfg=white guifg=#FFFFFF      ctermbg=236   guibg=#555555    cterm=NONE gui=bold
+hi PmenuSel      ctermfg=white guifg=#FFFFFF      ctermbg=24    guibg=#003F9D    cterm=NONE gui=italic
+hi PmenuSbar     ctermfg=black guifg=#000000      ctermbg=black guibg=#FFFFFF    cterm=NONE
+hi PmenuThumb    ctermfg=gray  guifg=#888888      ctermbg=gray  guibg=#888888    cterm=NONE
+" }}}
+
 hi VertSplit ctermfg=238 ctermbg=NONE cterm=NONE
 hi Title	term=bold ctermfg=magenta gui=bold guifg=aquamarine
 
 " {{{
 " cursor / dynamic / other {{{
-hi ColorColumn  guifg=NONE      guibg=#220000   gui=NONE
+hi ColorColumn  guifg=NONE      guibg=#800000   gui=NONE
             \   ctermfg=NONE    ctermbg=52      cterm=bold
+
 hi Cursor       guifg=#000000   guibg=#ffff99   gui=NONE
             \   ctermfg=black   ctermbg=white   cterm=reverse
+
 hi CursorIM     guifg=NONE      guibg=#aaccff   gui=NONE
             \   ctermfg=black   ctermbg=white   cterm=reverse
+
 hi CursorLine   guifg=NONE      guibg=#1b1b1b   gui=NONE
             \   ctermfg=NONE     ctermbg=233     cterm=NONE
+
 hi CursorColumn guifg=NONE      guibg=#1b1b1b   gui=NONE
             \   ctermfg=NONE    ctermbg=16      cterm=NONE
-hi CursorLineNr guifg=a0a000    guibg=NONE      gui=bold
+
+hi CursorLineNr guifg=#a0a000    guibg=NONE      gui=bold
             \   ctermfg=154     ctermbg=238     cterm=bold
 
 hi Visual       guifg=#ffffff   guibg=#606070   gui=NONE
@@ -88,58 +110,71 @@ hi MatchParen   guifg=NONE      guibg=#3377aa   gui=NONE
             \   ctermfg=white   ctermbg=blue    cterm=NONE
 "}}}
 
-" {{{
-" tabs
-hi TabLine     ctermfg=white ctermbg=235 cterm=bold
-hi TabLineFill ctermfg=white ctermbg=232 cterm=bold
-hi TabLineSel  ctermfg=white ctermbg=34 cterm=bold
-
+" {{{ Tabs
+hi TabLine     ctermfg=white ctermbg=235 cterm=bold guifg=#FFFFFF guibg=#3E3E3E gui=bold
+hi TabLineFill ctermfg=white ctermbg=232 cterm=bold guifg=#FFFFFF guibg=#161616 gui=bold
+hi TabLineSel  ctermfg=white ctermbg=34  cterm=bold guifg=#FFFFFF guibg=#007700 gui=bold
 "}}}
 
-" syntax hi colors
-hi Comment	term=bold ctermfg=darkcyan guifg=cyan4
+" {{{ Spelling
+if has('spell')
+    hi spellBad     guisp=#fcaf3e
+    hi spellCap     guisp=#73d216
+    hi spellRare    guisp=#fcaf3e
+    hi spellLocal   guisp=#729fcf
+endif
+" }}}
 
-hi PreProc	ctermfg=brown guifg=dodgerblue4
+" {{{ Syntax
+" hi Comment	    term=bold ctermfg=darkcyan guifg=cyan4
+hi Comment	    term=bold ctermfg=darkcyan guifg=#00a400
 
-hi Constant	ctermfg=darkred guifg=firebrick3
+hi PreProc	    ctermfg=brown guifg=#ac4311 gui=bold
 
-hi Type		ctermfg=darkgreen gui=none guifg=chartreuse3
-hi Statement	term=bold ctermfg=darkyellow gui=none guifg=gold3
+hi Constant	    ctermfg=darkred guifg=firebrick3
+
+" hi Type		    ctermfg=darkgreen gui=none guifg=chartreuse3
+
+hi Type		    ctermfg=darkgreen guifg=#a4c0e4 gui=bold
+
+hi Statement	term=bold ctermfg=darkyellow gui=bold guifg=#ffaa00
 
 hi Identifier	ctermfg=darkgreen guifg=darkolivegreen4
-hi Ignore	term=bold ctermfg=darkgray guifg=gray45
+hi Ignore	    term=bold ctermfg=darkgray guifg=gray45
 
-hi Special	ctermfg=brown guifg=sienna
-hi Error	term=reverse ctermfg=gray ctermbg=red guifg=gray guibg=red3
-hi Todo		term=standout ctermfg=black ctermbg=yellow gui=bold guifg=gray10 guibg=yellow4
+hi Special	    ctermfg=brown guifg=sienna
+hi Error	    cterm=reverse ctermfg=gray ctermbg=red guifg=gray guibg=red3    gui=undercurl
+hi Todo		    term=standout ctermfg=black ctermbg=yellow gui=bold guifg=gray10 guibg=yellow4
+hi Number	    ctermfg=darkred guifg=red2
 
 "hi Underlined	term=underline cterm=underline ctermfg=darkblue gui=underline guifg=slateblue
 
-hi Number	ctermfg=darkred guifg=red2
 " syntax hi links
-hi link String		Constant
-hi link Character	Constant
-hi link Number		Constant
-hi link Boolean		Constant
-hi link Float		Number
-hi link Function	Identifier
-hi link Number		Constant
-hi link Conditional	Statement
-hi link Repeat		Statement
-hi link Label		Statement
-hi link Keyword		Statement
-hi link Exception	Statement
-hi link Operator	Statement
-hi link Include		PreProc
-hi link Define		PreProc
-hi link Macro		PreProc
-hi link PreCondit	PreProc
+hi link String		    Constant
+hi link Character	    Constant
+hi link Number		    Constant
+hi link Boolean		    Constant
+hi link Float		    Constant
+hi link Function	    Identifier
+hi link Number		    Constant
+hi link Conditional	    Statement
+hi link Repeat		    Statement
+hi link Label		    Statement
+hi link Keyword		    Statement
+hi link Exception	    Statement
+hi link Operator	    Statement
+hi link Include		    PreProc
+hi link Define		    PreProc
+hi link Macro		    PreProc
+hi link PreCondit       PreProc
 hi link StorageClass	Type
-hi link Structure	Type
-hi link Typedef		Type
-hi link Tag		Special
-hi link SpecialChar	Special
-hi link Delimiter	Special
+hi link Structure	    Type
+hi link Typedef		    Type
+hi link Tag		        Special
+hi link SpecialChar	    Special
+hi link Delimiter	    Special
 hi link SpecialComment	Special
-hi link Debug		Special
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi link Debug		    Special
+" }}}
+
+" vim sw=4 ts=4 foldmethod=marker
