@@ -25,3 +25,6 @@
 [submodule "vim/bundle/FuzzyFinder"]
 	path = vim/bundle/FuzzyFinder
 	url = git@github.com:vim-scripts/FuzzyFinder.git
+[submodule "vim/bundle/YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
