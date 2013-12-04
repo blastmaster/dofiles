@@ -6,4 +6,4 @@
 " t - include tearoff menu itmes
 " set guioptions=acgit
 set guioptions=acit
-set guifont=Mono\ 7
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 7
