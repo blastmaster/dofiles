@@ -233,13 +233,16 @@ colorscheme mydante
 
 " Mappings ---------------------------------------------------------------------
 " older maps
-map <F11> i#! /bin/bash<ESC>o
-map <F12> i#! /usr/bin/perl<ESC>o
-map <F10> :noh<CR> " turn off search highlighting
+noremap <F11> i#! /bin/bash<ESC>o
+noremap <F12> i#! /usr/bin/perl<ESC>o
+noremap <F10> :noh<CR> " turn off search highlighting
+noremap <F9> :if &background == 'dark' <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
+
+
 " setting corresponding paranthesis automatica and set cursor inside
 " TODO: These mappings should only happens in code files
-imap ( ()<Left>
-imap [ []<Left>
+inoremap ( ()<Left>
+inoremap [ []<Left>
 " imap { {<CR><CR>}<UP>
 " when jumping between matches in the middle of the window
 nnoremap n nzzzv
@@ -261,11 +264,15 @@ inoremap <c-u> <esc>mzgUiw`za
 " don't move on *
 nnoremap * *<c-o>
 
-" toggle options
+" setting leader keys
 let mapleader = ','
-vmap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
-noremap <leader>, :NERDTreeToggle<CR>
+let maplocalleader = ','
 
+" toggle options
+vnoremap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
+
+" NerdTree settings
+noremap <leader>, :NERDTreeToggle<CR>
 let NERDTreeWinPos = 'right'
 let NERDTreeDirArrows = 1
 let NERDTreeCascadeOpenSingelChildDir = 1
@@ -293,37 +300,35 @@ match ExtraWhitespace2 /\s\+$\| \+\ze\t/
 " include visual line marking 80 characters
 if v:version >= 703
     set colorcolumn=80
-    nmap <F4> :if &colorcolumn == 80<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=80<Bar>endif<CR>
+    nnoremap <F4> :if &colorcolumn == 80<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=80<Bar>endif<CR>
 endif
 
 " toggle tabline
-nmap <F6> :if &showtabline == 1<Bar>set showtabline=0<Bar>else<Bar>set showtabline=1<Bar>endif<CR>
+noremap <F6> :if &showtabline == 1<Bar>set showtabline=0<Bar>else<Bar>set showtabline=1<Bar>endif<CR>
 " toggle linenumbers
-nmap <F5> :set number!<CR>
+noremap <F5> :set number!<CR>
 " toggle cursorline
-nmap <F3> :set cursorline!<CR>
-nmap <F7> :call Prove()<CR>
+nnoremap <F3> :set cursorline!<CR>
+nnoremap <F7> :call Prove()<CR>
 " nmap <F8> :call Compile()<CR>
-map <C-h> :new %:p:r.h
+nnoremap <C-h> :new %:p:r.h
 
 " resize horizontal split
-nmap + <C-w>+
-nmap _ <C-w>-
+noremap + <C-w>+
+noremap _ <C-w>-
 " resize vertical split
 "nmap > <C->>
 "nmap < <C-><
 " go to next split
-nmap <leader>w <C-w>w
+noremap <leader>w <C-w>w
 
 "setting tagbar
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 let g:tagbar_indent = 1
 let g:tagbar_singleklick = 1
-nmap <leader>t :TagbarToggle<CR>
-" nmap <leader>t :TlistToggle<CR>
-" nmap <leader>n :tabnext<CR>
-" nmap <leader>p :tabprev<CR>
+" nmap <leader>t :TagbarToggle<CR>
+noremap <leader>t :TlistToggle<CR>
 
 " easier split naviagation
 nnoremap <C-H> <C-W><C-H>
@@ -332,9 +337,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
 " toggle spell checking
-nmap <leader>sd :set spell! spelllang=de<CR>
-nmap <leader>se :set spell! spelllang=en<CR>
-nnoremap <leader>l :FufFile <CR>
+nnoremap <leader>sd :set spell! spelllang=de<CR>
+nnoremap <leader>se :set spell! spelllang=en<CR>
+
+" Fuzzy Finder Mappings
+nnoremap <leader>f :FufFile <CR>
 nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>ft :FufTag<CR>
 
