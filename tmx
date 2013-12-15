@@ -33,8 +33,8 @@ fi
 case $1 in
     -a) shift; attach_session "$@";;
     -n) shift; new_session "$@";;
-    -s) shift; save_session "$@";;
-    -r) shift; reload_session "$@";;
+    -s) shift; save_session $1 $sav_dir;;
+    -r) shift; reload_session $1 $sav_dir;;
     -c) shift; choose_session $sav_dir;;
     -h) help;;
      *) new_session "$@";;
