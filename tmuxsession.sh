@@ -49,12 +49,12 @@ function dump_session()
 # write state of a given tmux session in a sav file
 function save_session()
 {
-    local session_name=$1
-    local session_dir=$2
+    local session_name=${1:?"${FUNCNAME[0]} session name is required"}
+    local session_dir=${2:?"${FUNCNAME[0]} directory where sessions saved is required"}
     if [[ -d $session_dir ]]; then
         (dump_session $session_name)> "$session_dir/${session_name}.sav"
     else
-        echo "[tmx] ${FUNCNAME[0]} No such directory $session_dir"
+        echo "${FUNCNAME[0]} No such directory $session_dir"
     fi
 }
 
@@ -73,7 +73,7 @@ function reload_session()
             tmux new-window -a -c $path "$application"
         done < "$session_dir/${session_name}.sav"
     else
-        echo "[tmx] ${FUNCNAME[0]} No such directory $session_dir"
+        echo "${FUNCNAME[0]} No such directory $session_dir"
     fi
     tmux attach -t $session_name
     IFS=${OLDIFS}
@@ -82,7 +82,7 @@ function reload_session()
 function attach_session()
 {
     local session_name=${1:?"${FUNCNAME[0]} session name required"}
-    local testdir=${2:?"${FUNCNAME[0]} directory of saved session required"}
+    local savdir=${2:?"${FUNCNAME[0]} directory of saved session required"}
     local newsession=$3
     OLDIFS=${IFS}
     IFS=$'\x0a'
@@ -94,7 +94,7 @@ function attach_session()
             tmux attach-session -t $session_name
         fi
     else
-        reload_session $session_name $testdir
+        reload_session $session_name $savdir
     fi
     IFS=${OLDIFS}
 }
@@ -110,8 +110,8 @@ function is_session_attached()
 # getting all names of sessions for that exists an .sav file
 function get_saved_sessions()
 {
-    local testdir=$1
-    declare -a savedsessions=( $( find $testdir -name "*.sav" ) )
+    local savdir=$1
+    declare -a savedsessions=( $( find $savdir -name "*.sav" ) )
     savedsessions=( ${savedsessions[@]##*/} )
     echo ${savedsessions[@]%.sav}
 }
@@ -137,9 +137,9 @@ function get_selection_list()
 # choosing a session from a dmenu selection to attach them
 function choose_session()
 {
-    local testdir=$1
+    local savdir=$1
     IFS=$'\n'
     local target=$( get_selection_list |
         dmenu -nb '#000' -nf '#ff7c00' -sf '#000' -sb '#3cff00' | awk -F':' '{print $1}')
-    attach_session $target $testdir
+    attach_session $target $savdir
 }
