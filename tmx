@@ -1,10 +1,10 @@
 #! /bin/bash
 
 # directory where tmuxsession.sh is executable placed
-lib_path="~/.bin/"
+lib_path=~/.bin
 
 # directory where sessions should been saved
-sav_dir="~/.bin/tmuxsessions/"
+sav_dir=~/.bin/tmuxsessions
 
 function help()
 {
@@ -14,25 +14,21 @@ function help()
     -a attachs a session within a new session
     -n creates complete new session
     -c let you choose a session to attach
-    -s saves sate of given session in a file
-    -r reload state of given session
+    -s saves sate of given session in a file requires session name
+    -r reload state of given session requires session name and save directory
     in default case a new session is created
 end
 }
 
-if [[ -x "$lib_path/tmuxsession.sh" ]]; then
-    source "$lib_path/tmuxsession.sh"
-else
+if ! source "$lib_path/tmuxsession.sh"; then
     echo "[tmx] tmuxsession.sh cannot found but is necessary"
     exit 1
 fi
-
 
 if [[ ! -d $sav_dir ]]; then
     echo "[tmx] create session directory"
     mkdir -p $sav_dir
 fi
-
 
 case $1 in
     -a) shift; attach_session "$@";;
