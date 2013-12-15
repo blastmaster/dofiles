@@ -1,14 +1,7 @@
 #! /bin/bash
 
-# script to manage my tmux session
+# collection of functions to manage tmux sessions with dmenu
 
-# declaring some global variables
-# a list of all sessions
-# the length of the list
-declare -a slist=( $(tmux ls -F '#{session_name}') )
-declare -i len=${#slist[@]:-2}
-
-# works with defaults less then 10
 function new_session()
 {
     local i=1
@@ -20,9 +13,13 @@ function new_session()
     tmux new-session -s $sname
 }
 
+# building a new session name
 function new_session_name()
 {
     local i=1
+    declare -a slist=( $(tmux ls -F '#{session_name}') )
+    declare -i len=${#slist[@]:-2}
+
     if ! tmux has-session -t 0x0$i 2>/dev/null; then
         echo "0x0$i"
         return
@@ -38,24 +35,87 @@ function new_session_name()
     done
 }
 
-function attach_session()
+# dumping sate of a tmux session
+# dump contains currently running application and current working directory
+function dump_session()
 {
     local session_name=$1
-    local newsession=$2
+    local delim=$':'
+    if tmux has-session -t $session_name; then
+        tmux list-windows -F "#W${delim}#{pane_current_path}" -t ${session_name}
+    fi
+}
 
+# write state of a given tmux session in a sav file
+function save_session()
+{
+    local session_name=$1
+    local session_dir=$2
+    if [[ -d $session_dir ]]; then
+        (dump_session $session_name)> "$session_dir/${session_name}.sav"
+    else
+        echo "[tmx] ${FUNCNAME[0]} No such directory $session_dir"
+    fi
+}
+
+# reload session state from file, build tmux session and attach them
+function reload_session()
+{
+    local session_name=${1:?"${FUNCNAME[0]} session name required"}
+    local session_dir=${2:?"${FUNCNAME[0]} directory where sessions saved required"}
+    local OLDIFS=${IFS}
+    if [[ -d $session_dir ]]; then
+        while IFS=$':' read application path; do
+            if ! tmux has-session -t $session_name 2>/dev/null; then
+                echo "[Debug] create new session: $session_name"
+                tmux new-session -d -s  $session_name
+            fi
+            tmux new-window -a -c $path "$application"
+        done < "$session_dir/${session_name}.sav"
+    else
+        echo "[tmx] ${FUNCNAME[0]} No such directory $session_dir"
+    fi
+    tmux attach -t $session_name
+    IFS=${OLDIFS}
+}
+
+function attach_session()
+{
+    local session_name=${1:?"${FUNCNAME[0]} session name required"}
+    local testdir=${2:?"${FUNCNAME[0]} directory of saved session required"}
+    local newsession=$3
     OLDIFS=${IFS}
     IFS=$'\x0a'
-    declare -a attachedlist=( $(tmux ls -F '#{session_attached}') )
-    for (( i=0; i < $len; i++ )); do
-        if [[ $session_name == ${slist[$i]} ]]; then
-            if [[ ${attachedlist[$i]} -eq 1 ]]; then
-                attach_attached_session $session_name $newsession
-            else
-                tmux attach-session -t $session_name
-            fi
+    if tmux has-session -t $session_name 2>/dev/null; then
+        is_attached=$(is_session_attached $session_name)
+        if [[ $is_attached -eq 1 ]]; then
+            attach_attached_session $session_name $newsession
+        else
+            tmux attach-session -t $session_name
         fi
-    done
+    else
+        reload_session $session_name $testdir
+    fi
+    IFS=${OLDIFS}
 }
+
+# check if given session is already anywhere attached or not
+function is_session_attached()
+{
+    local session_name=${1:?"${FUNCNAME[0]} no session name given"}
+    local delim=$":"
+    tmux ls -F "#{session_name}${delim}#{session_attached}" | grep "^$session_name" | cut -d"$delim" -f2
+}
+
+# getting all names of sessions for that exists an .sav file
+function get_saved_sessions()
+{
+    local testdir=$1
+    declare -a savedsessions=( $( find $testdir -name "*.sav" ) )
+    savedsessions=( ${savedsessions[@]##*/} )
+    echo ${savedsessions[@]%.sav}
+}
+
 
 # function to attach one session from multiple clients
 function attach_attached_session()
@@ -68,10 +128,18 @@ function attach_attached_session()
     tmux attach-session -t $newsession \; set-option destroy-unattached
 }
 
+# create complete session list, containing saved sessions and activ ones
+function get_selection_list()
+{
+    echo  `get_saved_sessions` | tr ' ' '\n' && tmux ls
+}
+
+# choosing a session from a dmenu selection to attach them
 function choose_session()
 {
-    local target=$(tmux ls |
-        dmenu -nb '#000' -nf '#ff7c00' -sf '#000' -sb '#3cff00' -l $len |
-        awk -F':' '{print $1}' )
-    attach_session $target
+    local testdir=$1
+    IFS=$'\n'
+    local target=$( get_selection_list |
+        dmenu -nb '#000' -nf '#ff7c00' -sf '#000' -sb '#3cff00' | awk -F':' '{print $1}')
+    attach_session $target $testdir
 }
