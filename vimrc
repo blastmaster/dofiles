@@ -137,6 +137,11 @@ set cursorline
 " activate omni completion, set completion function
 set omnifunc=syntaxcomplete#Complete
 
+" Folding
+set foldlevelstart=0    " stating with closed folds
+set foldmethod=syntax
+set foldnestmax=2
+
 let mojo_highlight_data = 1
 
 " customize my tabline
@@ -229,7 +234,7 @@ noremap <C-Left>   :DefaultFontSize<CR>
 " loading template with according file ending in new buffer
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
-colorscheme mydante
+colorscheme codecolors
 
 " Mappings ---------------------------------------------------------------------
 " older maps
@@ -237,6 +242,10 @@ noremap <F11> i#! /bin/bash<ESC>o
 noremap <F12> i#! /usr/bin/perl<ESC>o
 noremap <F10> :noh<CR> " turn off search highlighting
 noremap <F9> :if &background == 'dark' <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
+
+" editing vimrc file quickly
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 
 " setting corresponding paranthesis automatica and set cursor inside
