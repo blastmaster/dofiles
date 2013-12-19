@@ -31,7 +31,7 @@ if [[ ! -d $sav_dir ]]; then
 fi
 
 case $1 in
-    -a) shift; attach_session "$@";;
+    -a) shift; attach_session "$@" $sav_dir;;
     -n) shift; new_session "$@";;
     -s) shift; save_session $1 $sav_dir;;
     -r) shift; reload_session $1 $sav_dir;;
