@@ -59,15 +59,20 @@ function save_session()
 }
 
 # reload session state from file, build tmux session and attach them
+# session cannot be reload if they is already active
+# if the session is active they should be attached instead of reloaded
 function reload_session()
 {
     local session_name=${1:?"${FUNCNAME[0]} session name required"}
     local session_dir=${2:?"${FUNCNAME[0]} directory where sessions saved required"}
     local OLDIFS=${IFS}
+    if tmux has-session -t $session_name 2>/dev/null; then
+        attach_session $session_name $session_dir
+        return
+    fi
     if [[ -d $session_dir ]]; then
         while IFS=$':' read application path; do
             if ! tmux has-session -t $session_name 2>/dev/null; then
-                echo "[Debug] create new session: $session_name"
                 tmux new-session -d -s  $session_name
             fi
             tmux new-window -a -c $path "$application"
