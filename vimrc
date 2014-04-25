@@ -243,6 +243,11 @@ noremap <F12> i#! /usr/bin/perl<ESC>o
 noremap <F10> :noh<CR> " turn off search highlighting
 noremap <F9> :if &background == 'dark' <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
 
+" start console vim with dark colorscheme by default
+if (! has('gui_running'))
+    let &background = 'dark'
+endif
+
 " editing vimrc file quickly
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -285,6 +290,12 @@ noremap <leader>, :NERDTreeToggle<CR>
 let NERDTreeWinPos = 'right'
 let NERDTreeDirArrows = 1
 let NERDTreeCascadeOpenSingelChildDir = 1
+let NERDTreeIgnore = ['\.s\?o$[[file]]', '\.a[[file]]$']
+
+" orgmode settings {{{
+let g:org_todo_keywords = [ 'TODO', '|', 'DONE']
+let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':weight bold']], ['DONE', [':foreground green', ':weight bold']]]
+" }}}
 
 " clear trailing whitespaces
 nnoremap <leader>. :%s/\s\+$//<CR>:let @/=''<CR>
@@ -336,8 +347,8 @@ let g:tagbar_left = 1
 let g:tagbar_width = 30
 let g:tagbar_indent = 1
 let g:tagbar_singleklick = 1
-" nmap <leader>t :TagbarToggle<CR>
-noremap <leader>t :TlistToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
+" noremap <leader>t :TlistToggle<CR>
 
 " easier split naviagation
 nnoremap <C-H> <C-W><C-H>
