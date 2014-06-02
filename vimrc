@@ -1,7 +1,5 @@
 " ~/.vimrc for configure the vim-terminal-editor
 
-" call pathogen to load my plugins
-" call pathogen#infect()
 
 "
 " Basic Options ----------------------------------------------------------------
@@ -338,6 +336,9 @@ nnoremap <leader>tb :CtrlPBufTag<CR>
 
 " searching lefthand word with ack.vim
 nnoremap <leader>a :LAck<CR>
+
+" GitGutter settings
+nnoremap <leader>gg :GitGutterToggle<CR>
 
 " NerdTree settings
 nnoremap <leader>\ :NERDTreeToggle<CR>
