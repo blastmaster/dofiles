@@ -1,13 +1,35 @@
 " ~/.vimrc for configure the vim-terminal-editor
 
 " call pathogen to load my plugins
-call pathogen#infect()
+" call pathogen#infect()
 
 "
 " Basic Options ----------------------------------------------------------------
 "
 " be IMproved
 set nocompatible
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mileszs/ack.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'jceb/vim-orgmode'
+Plugin 'tpope/vim-speeddating'
+Plugin 'vim-scripts/utl.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
+
 " utf-8
 set encoding=utf-8
 set fileencoding=utf-8
@@ -109,6 +131,15 @@ set wildignore+=*.aux,*.toc,*.toc					"LateX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg		"binary images
 set wildignore+=*.o,*.so,*.class					"compiled object files
 
+" start console vim with dark and gui with light colorscheme by default
+if (! has('gui_running'))
+    let &background = 'dark'
+    let g:airline_theme = 'murmur'
+else
+    let &background = 'light'
+    let g:airline_theme = 'sol'
+endif
+
 " timeouts
 " timeout only for for keycodes after 10 milliseconds
 set notimeout
@@ -142,43 +173,41 @@ set foldlevelstart=0    " stating with closed folds
 set foldmethod=syntax
 set foldnestmax=2
 
-let mojo_highlight_data = 1
-
 " customize my tabline
-function! MyTabLine()
-    let s = ''
-    for i in range(tabpagenr('$'))
-        " select the highlighting
-        if i + 1 == tabpagenr()
-            let s .= '%#TabLineSel#'
-        else
-            let s .= '%#TabLine#'
-        endif
+"function! MyTabLine()
+    "let s = ''
+    "for i in range(tabpagenr('$'))
+        "" select the highlighting
+        "if i + 1 == tabpagenr()
+            "let s .= '%#TabLineSel#'
+        "else
+            "let s .= '%#TabLine#'
+        "endif
 
-        " set the tab page number (for mouse clicks)
-        let s .= '%' . (i + 1) . 'T'
+        "" set the tab page number (for mouse clicks)
+        "let s .= '%' . (i + 1) . 'T'
 
-        " show the tabnumber to navigat with <n>gt
-        let s .= ' '. (i + 1) . ' '
+        "" show the tabnumber to navigat with <n>gt
+        "let s .= ' '. (i + 1) . ' '
 
-        " the label is made by MyTabLabel()
-        let s .= '%{MyTabLabel(' . (i + 1) . ')} '
-    endfor
+        "" the label is made by MyTabLabel()
+        "let s .= '%{MyTabLabel(' . (i + 1) . ')} '
+    "endfor
 
-    " after the last tab fill with TabLineFill and reset tab page nr
-    let s .= '%#TabLineFill#%T'
+    "" after the last tab fill with TabLineFill and reset tab page nr
+    "let s .= '%#TabLineFill#%T'
 
-    return s
-endfunction
+    "return s
+"endfunction
 
-function! MyTabLabel(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    let string = fnamemodify(bufname(buflist[winnr -1]), ':t')
-    return empty(string) ? '[unnamed]' : string
-endfunction
+"function! MyTabLabel(n)
+    "let buflist = tabpagebuflist(a:n)
+    "let winnr = tabpagewinnr(a:n)
+    "let string = fnamemodify(bufname(buflist[winnr -1]), ':t')
+    "return empty(string) ? '[unnamed]' : string
+"endfunction
 
-set tabline=%!MyTabLine()
+"set tabline=%!MyTabLine()
 
 let s:fontpattern = '^\([^0-9]\+\)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
@@ -236,17 +265,25 @@ autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
 colorscheme codecolors
 
+function! ToggleTheme()
+    if &background == 'dark'
+        let &background = 'light'
+        let g:airline_theme = 'sol'
+    else
+        let &background = 'dark'
+        let g:airline_theme = 'murmur'
+    endif
+endfunction
+
+
 " Mappings ---------------------------------------------------------------------
 " older maps
 noremap <F11> i#! /bin/bash<ESC>o
 noremap <F12> i#! /usr/bin/perl<ESC>o
 noremap <F10> :noh<CR> " turn off search highlighting
-noremap <F9> :if &background == 'dark' <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
+"noremap <F9> :if &background == 'dark'  <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
+noremap <F9> :call ToggleTheme()<CR>
 
-" start console vim with dark colorscheme by default
-if (! has('gui_running'))
-    let &background = 'dark'
-endif
 
 " editing vimrc file quickly
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -279,23 +316,58 @@ inoremap <c-u> <esc>mzgUiw`za
 nnoremap * *<c-o>
 
 " setting leader keys
-let mapleader = ','
+let mapleader = '\'
 let maplocalleader = ','
 
-" toggle options
+" toggle postfix conditions in perl
 vnoremap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
 
+"NERDCommenter settings
+nnoremap <leader>cc :NERDComComment
+nnoremap <leader>cu :NERDComUncommentLine
+nnoremap <leader>ci :NERDComInvertComment
+nnoremap <leader>cA :NERDComAppendComment
+
+" CtrlP settings
+let g:ctrlp_map = '<leader>fs'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_extensions = ['buffertag']
+nnoremap <leader>fb :CtrlPBuffer<CR>
+nnoremap <leader>fm :CtrlPMRU<CR>
+nnoremap <leader>tb :CtrlPBufTag<CR>
+
+" searching lefthand word with ack.vim
+nnoremap <leader>a :LAck<CR>
+
 " NerdTree settings
-noremap <leader>, :NERDTreeToggle<CR>
+nnoremap <leader>\ :NERDTreeToggle<CR>
 let NERDTreeWinPos = 'right'
 let NERDTreeDirArrows = 1
 let NERDTreeCascadeOpenSingelChildDir = 1
 let NERDTreeIgnore = ['\.s\?o$[[file]]', '\.a[[file]]$']
 
+" tagbar settings
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+let g:tagbar_indent = 1
+let g:tagbar_singleklick = 1
+nnoremap <leader>t :TagbarToggle<CR>
+
 " orgmode settings {{{
 let g:org_todo_keywords = [ 'TODO', '|', 'DONE']
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':weight bold']], ['DONE', [':foreground green', ':weight bold']]]
+let g:org_agenda_files = ['~/org/agenda.org']
 " }}}
+
+" syntastic syntax
+let syntastic_enable_signs = 1
+highlight SyntasticError        ctermfg=197 ctermbg=233
+highlight SyntasticWarning      ctermfg=220 ctermbg=233
+highlight SyntasticErrorSign    ctermfg=197 ctermbg=233
+highlight SyntasticErrorLine    ctermfg=118 ctermbg=233
+highlight SyntasticWarningLine  ctermfg=118 ctermbg=233
+highlight SyntasticStyleError   ctermfg=197 ctermbg=233
+highlight SyntasticStyleWarning ctermfg=118 ctermbg=233
 
 " clear trailing whitespaces
 nnoremap <leader>. :%s/\s\+$//<CR>:let @/=''<CR>
@@ -342,12 +414,6 @@ noremap _ <C-w>-
 " go to next split
 noremap <leader>w <C-w>w
 
-"setting tagbar
-let g:tagbar_left = 1
-let g:tagbar_width = 30
-let g:tagbar_indent = 1
-let g:tagbar_singleklick = 1
-nmap <leader>t :TagbarToggle<CR>
 " noremap <leader>t :TlistToggle<CR>
 
 " easier split naviagation
@@ -359,11 +425,6 @@ nnoremap <C-L> <C-W><C-L>
 " toggle spell checking
 nnoremap <leader>sd :set spell! spelllang=de<CR>
 nnoremap <leader>se :set spell! spelllang=en<CR>
-
-" Fuzzy Finder Mappings
-nnoremap <leader>f :FufFile <CR>
-nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>ft :FufTag<CR>
 
 " Abbreviations
 iab dp use Data::Printer;
@@ -480,9 +541,9 @@ EOD
     endif
 endfunction
 
-amenu Sessions.&Delete :call DeleteSession()<CR>
-" disable cursorline if current file ist *.tex
+" disable cursorline if current file is *.tex or *.txt
 autocmd BufEnter *.tex set nocursorline
+autocmd BufEnter *.txt set nocursorline
 autocmd BufEnter *.t set filetype=perl
 autocmd BufEnter *.json set filetype=javascript
 
