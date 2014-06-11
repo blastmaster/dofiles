@@ -148,3 +148,8 @@ function choose_session()
         dmenu -nb '#000' -nf '#ff7c00' -sf '#000' -sb '#3cff00' | awk -F':' '{print $1}')
     attach_session $target $savdir
 }
+
+function list_sessions()
+{
+    tmux ls
+}

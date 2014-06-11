@@ -16,6 +16,7 @@ function help()
     -c let you choose a session to attach
     -s saves sate of given session in a file requires session name
     -r reload state of given session requires session name and save directory
+    -l list current sessions
     in default case a new session is created
 end
 }
@@ -36,6 +37,7 @@ case $1 in
     -s) shift; save_session $1 $sav_dir;;
     -r) shift; reload_session $1 $sav_dir;;
     -c) shift; choose_session $sav_dir;;
+    -l) shift; list_sessions $@ ;;
     -h) help;;
      *) new_session "$@";;
 esac
