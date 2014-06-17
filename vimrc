@@ -392,8 +392,8 @@ match ExtraWhitespace2 /\s\+$\| \+\ze\t/
 
 " include visual line marking 80 characters
 if v:version >= 703
-    set colorcolumn=80
-    nnoremap <F4> :if &colorcolumn == 80<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=80<Bar>endif<CR>
+    set colorcolumn=100
+    nnoremap <F4> :if &colorcolumn == 100<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=100<Bar>endif<CR>
 endif
 
 " toggle tabline
