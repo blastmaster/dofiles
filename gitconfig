@@ -1,0 +1,7 @@
+[core]
+	editor = /usr/bin/vim
+[user]
+	name = blastmaster
+	email = blastmaster@tuxcode.org
+[color]
+	ui = auto
