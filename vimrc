@@ -345,7 +345,7 @@ nnoremap <leader>\ :NERDTreeToggle<CR>
 let NERDTreeWinPos = 'right'
 let NERDTreeDirArrows = 1
 let NERDTreeCascadeOpenSingelChildDir = 1
-let NERDTreeIgnore = ['\.s\?o$[[file]]', '\.a[[file]]$']
+let NERDTreeIgnore = ['\.s\?o$[[file]]', '\.a[[file]]$', '\.pyc[[file]]']
 
 " tagbar settings
 let g:tagbar_left = 1
