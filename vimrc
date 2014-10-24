@@ -254,12 +254,13 @@ command! IncrementFontSize :call <SID>IncrementFontSize()
 command! DecrementFontSize :call <SID>DecrementFontSize()
 command! DefaultFontSize   :call <SID>DefaultFontSize()
 
-noremap <C-Up> :IncrementFontSize<CR>
-noremap <C-Down> :DecrementFontSize<CR>
-noremap <C-Left>   :DefaultFontSize<CR>
+nnoremap <C-Up> :IncrementFontSize<CR>
+nnoremap <C-Down> :DecrementFontSize<CR>
+nnoremap <C-Left>   :DefaultFontSize<CR>
 
 " loading template with according file ending in new buffer
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
+
 
 colorscheme codecolors
 
@@ -325,11 +326,14 @@ nnoremap <leader>cc :NERDComComment
 nnoremap <leader>cu :NERDComUncommentLine
 nnoremap <leader>ci :NERDComInvertComment
 nnoremap <leader>cA :NERDComAppendComment
+nnoremap <leader>cs :NERDComSexyComment
 
 " CtrlP settings
 let g:ctrlp_map = '<leader>fs'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_extensions = ['buffertag']
+let g:ctrlp_by_filename = 1					" search for filenames instead of full paths
+let g:ctrlp_tabpage_position = 'ac'			" open tab after the current one
 nnoremap <leader>fb :CtrlPBuffer<CR>
 nnoremap <leader>fm :CtrlPMRU<CR>
 nnoremap <leader>tb :CtrlPBufTag<CR>
