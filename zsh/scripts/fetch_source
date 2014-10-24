@@ -1,0 +1,26 @@
+#! /bin/bash
+
+set -e
+
+# utility function for easy and fast source fetching from various VCS
+# if the given path end up with 'git' we will use git else mecurial
+
+# TODO: check if VCS tools are installed
+
+# /*git@github.com:blastmaster/dofiles.git*/
+
+TMPDIR=/tmp/code/
+
+function _fs() {
+    local basename=${${1##*/}%%.*}
+    [[ -d $TMPDIR ]] || mkdir -p ${TMPDIR}${basename}
+    [[ ${1##*.} == 'git' ]] && git clone $1 ${TMPDIR}${basename} || hg clone $1 ${TMPDIR}${basename}
+    cd ${TMPDIR}${basename}
+}
+
+
+function fs() {
+    _fs "$@"
+}
+
+# EOF
