@@ -1,5 +1,4 @@
-" ~/.vimrc for configure the vim-terminal-editor
-
+" ~/.vimrc for configure the vim-editor
 
 "
 " Basic Options ----------------------------------------------------------------
@@ -7,6 +6,7 @@
 " be IMproved
 set nocompatible
 
+set rtp+=~/.vim/
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -41,8 +41,7 @@ set t_Co=256
 set synmaxcol=800
 
 set backspace=indent,eol,start
-" replace tabs with spaces
-" NOTE: while expandtab is set listchars for tabs dosen't work
+" expand tabs with spaces
 set expandtab
 " 4 spaces for each tab
 set tabstop=4
@@ -128,15 +127,6 @@ set wildignore+=.git,.svn,.hg						" Version Control
 set wildignore+=*.aux,*.toc,*.toc					"LateX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg		"binary images
 set wildignore+=*.o,*.so,*.class					"compiled object files
-
-" start console vim with dark and gui with light colorscheme by default
-if (! has('gui_running'))
-    let &background = 'dark'
-    let g:airline_theme = 'murmur'
-else
-    let &background = 'light'
-    let g:airline_theme = 'sol'
-endif
 
 " timeouts
 " timeout only for for keycodes after 10 milliseconds
@@ -261,8 +251,17 @@ nnoremap <C-Left>   :DefaultFontSize<CR>
 " loading template with according file ending in new buffer
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
+"colorscheme codecolors
+colorscheme distinguished
 
-colorscheme codecolors
+" start console vim with dark and gui with light colorscheme by default
+if (! has('gui_running'))
+    let &background = 'dark'
+    let g:airline_theme = 'murmur'
+else
+    let &background = 'light'
+    let g:airline_theme = 'sol'
+endif
 
 function! ToggleTheme()
     if &background == 'dark'
@@ -274,9 +273,9 @@ function! ToggleTheme()
     endif
 endfunction
 
-
 " Mappings ---------------------------------------------------------------------
 " older maps
+" TODO: register just one key for each filetype use /usr/bin/env interpreter
 noremap <F11> i#! /bin/bash<ESC>o
 noremap <F12> i#! /usr/bin/perl<ESC>o
 noremap <F10> :noh<CR> " turn off search highlighting
@@ -361,7 +360,32 @@ nnoremap <leader>t :TagbarToggle<CR>
 " orgmode settings {{{
 let g:org_todo_keywords = [ 'TODO', '|', 'DONE']
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':weight bold']], ['DONE', [':foreground green', ':weight bold']]]
-let g:org_agenda_files = ['~/org/agenda.org']
+"let g:org_agenda_files = ['~/org/agenda.org']
+let g:org_agenda_files = ['~/org/*.org']
+" disable org indent
+let g:org_indent = 0
+" }}}
+
+" utl settings {{{
+" set utl media type handler for pdf
+if $DISPLAY != '' || has('gui_running')
+    for pdfviewer in [ 'okular', 'zathura', 'evince' ]
+        let pdfviewer = '/usr/bin/'.pdfviewer
+        if filereadable(pdfviewer)
+            let g:utl_cfg_hdl_mt_application_pdf = 'silent! '.pdfviewer.' "%p" &'
+            break
+        endif
+    endfor
+endif
+"}}}
+
+" YouCompleteMe setttings {{{
+nnoremap <leader>gd :YcmCompleter GoTo<CR>
+
+let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_global_ycm_extra_conf = ''
+"let g:ycm_extra_conf_globlist = [ '~/dev/*' ]
+
 " }}}
 
 " syntastic syntax
@@ -394,7 +418,7 @@ hi ExtraWhitespace2 ctermbg=gray guibg=red
 match ExtraWhitespace /^\t*\zs \+/
 match ExtraWhitespace2 /\s\+$\| \+\ze\t/
 
-" include visual line marking 80 characters
+" include visual line marking 100 characters
 if v:version >= 703
     set colorcolumn=100
     nnoremap <F4> :if &colorcolumn == 100<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=100<Bar>endif<CR>
@@ -431,9 +455,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <leader>sd :set spell! spelllang=de<CR>
 nnoremap <leader>se :set spell! spelllang=en<CR>
 
-" Abbreviations
-iab dp use Data::Printer;
-
 " Autocommands -----------------------------------------------------------------
 " toggle CursorLineNr highliting in insert mode
 autocmd InsertEnter * hi CursorLineNr ctermbg=24 ctermfg=15 guifg=#FFFFFF guibg=#046491
@@ -449,20 +470,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "nor
 " close vim if nerdtree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" execute perl test from the editor
-function! Prove()
-    if ! exists("testfile")
-        let testfile = "t/*.t"
-    endif
-    let s:params = "-lrc -v"
-    execute "!prove --timer " . s:params . " " . testfile
-endfunction
-
-" call the perl interpreter from the editor
-function! Compile()
-    let compilefile = expand("%")
-    execute "!perl -c -Ilib " . compilefile
-endfunction
 
 " autoload and autosave sessions.
 
