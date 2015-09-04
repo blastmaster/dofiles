@@ -25,6 +25,9 @@ Plugin 'vim-scripts/utl.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 
@@ -287,6 +290,7 @@ noremap <F9> :call ToggleTheme()<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+nnoremap <C-t> :tabnew<CR>
 
 " setting corresponding paranthesis automatica and set cursor inside
 " TODO: These mappings should only happens in code files
@@ -337,6 +341,12 @@ nnoremap <leader>fb :CtrlPBuffer<CR>
 nnoremap <leader>fm :CtrlPMRU<CR>
 nnoremap <leader>tb :CtrlPBufTag<CR>
 
+" ultisnips
+let g:UltiSnipsExpandTrigger="<F2>"
+"let g:UltiSnipsListSnippet= '<c-tab>'
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " searching lefthand word with ack.vim
 nnoremap <leader>a :LAck<CR>
 
@@ -358,7 +368,7 @@ let g:tagbar_singleklick = 1
 nnoremap <leader>t :TagbarToggle<CR>
 
 " orgmode settings {{{
-let g:org_todo_keywords = [ 'TODO', '|', 'PROGRESS', '|', 'DONE' ]
+let g:org_todo_keywords = [ 'TODO', '|', 'PROGRESS', 'DONE' ]
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':weight bold']], ['PROGRESS', [':foreground yellow', 'weight bold']], ['DONE', [':foreground green', ':weight bold']]]
 "let g:org_agenda_files = ['~/org/agenda.org']
 let g:org_agenda_files = ['~/org/*.org']
@@ -469,7 +479,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "nor
 
 " close vim if nerdtree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 
 " autoload and autosave sessions.
 
