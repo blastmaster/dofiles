@@ -1,6 +1,7 @@
 .*.swp
 .*.swn
 .*.swo
+*.*.pyc
 vim/sessions/*
 vim/bundle/*
 vim/colors/*
