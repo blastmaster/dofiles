@@ -9,3 +9,5 @@ vim/colors/*
 !vim/colors/mygithub.vim!
 !vim/colors/mydante.vim!
 !vim/colors/distinguished.vim!
+
+zsh/cache/*

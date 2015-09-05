@@ -1,0 +1,10 @@
+#! /usr/bin/zsh
+
+own () {
+        if [ -n "${commands[sudo]}" ]
+        then
+                sudo chown -R "$USER:$(id -gn)" "$@"
+        else
+                chown -R "$USER:$(id -gn)" "$@"
+        fi
+}

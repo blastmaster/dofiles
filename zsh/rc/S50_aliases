@@ -1,0 +1,46 @@
+#!/bin/zsh
+
+autoload zmv
+alias mmv='noglob zmv -W'
+
+# if ( which sudo >/dev/null 2>/dev/null ) ; then
+#         alias su='export XAUTHORITY=${HOME}/.Xauthority ; sudo -s'
+#         alias sudo='export XAUTHORITY=${HOME}/.Xauthority ; sudo'
+# fi
+
+alias du="du -hcs"
+alias df="df -h"
+
+
+alias ls="ls --color=always"
+alias ltr="ls -ltr"
+
+alias grep='grep --color=always'
+alias fgrep='fgrep --color=always'
+alias egrep='egrep --color=always'
+
+alias l="ls --color=always -CF"
+alias la="ls --color=always -A"
+alias ll='ls --color=always -lhAtc'
+alias ldir='ls --color=always --group-directories-first -lhAtc'
+
+alias svim="sudo HOME=/home/blastmaster vim -u /home/blastmaster/.vimrc"
+alias powertop="sudo powertop"
+alias aiccu="sudo aiccu"
+
+alias gitp="git shortlog -s | cut -f1 | spark"
+
+alias i="ip a"
+alias c="clear"
+alias e="exit"
+alias cdc="cd;clear"
+alias cp='cp -v'
+
+alias acs="apt-cache search"
+alias acp="apt-cache policy"
+alias agi="sudo apt-get install"
+alias au="sudo apt-get update"
+alias agu="sudo apt-get upgrade"
+
+alias debs-by-size="dpkg-query -Wf 'x \${Installed-Size} \${Package} \${Status}\n' | sed -ne '/^x  /d' -e '/^x \(.*\) install ok installed$/s//\1/p' | sort -nr"
+

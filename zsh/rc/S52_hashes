@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+function addh()
+{
+    local abbreviation=${1:?"no abbreviation given"}
+    local dir=${2:-$(pwd)}
+    [[ -d $dir ]] && [[ -w $0 ]] &&
+    echo "hash -d ${abbreviation}=${dir}" >> $0
+}
+
+# 'hash' some often used directories
+
+# system stuff
+hash -d deb=/var/cache/apt/archives
+hash -d doc=/usr/share/doc
+hash -d linux=/lib/modules/$(uname -r)/build/
+hash -d log=/var/log
+hash -d slog=/var/log/syslog
+
+hash -d license=/usr/share/common-licenses
+
+# coding stuff
+hash -d dev=/home/blastmaster/development
+
+# new stuff

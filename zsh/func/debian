@@ -1,0 +1,46 @@
+#! /usr/bin/zsh
+#
+# inspired by grml-zsh-config
+#
+
+PAGER=${PAGER:-$(which less)}
+
+# View Debian changelog of a given Package
+dchange()
+{
+    emulate -L zsh
+    local pkg=${1:?"no package name given"}
+    if [[ -r /usr/share/doc/$pkg/changelog.Debian.gz ]]; then
+        $PAGER /usr/share/doc/$pkg/changelog.Debian.gz
+    elif [[ -r /usr/share/doc/$pkg/changelog.gz ]]; then
+        $PAGER /usr/share/doc/$pkg/changelog.gz
+    else
+        aptitude changelog $pkg
+    fi
+}
+
+# View Debian NEWS of a given package
+dnews()
+{
+    emulate -L zsh
+    local pkg=${1:?"no package name given"}
+    if [[ -r /usr/share/doc/$pkg/NEWS.Debian.gz ]]; then
+        $PAGER /usr/share/doc/$pkg/NEWS.Debian.gz
+    elif [[ -r /usr/share/doc/$pkg/NEWS.gz ]]; then
+        $PAGER /usr/share/doc/$pkg/NEWS.gz
+    else
+        echo "No NEWS file for package $pkg found"
+    fi
+}
+
+# View Debian copyright of a given package
+dcopyright()
+{
+    emulate -L zsh
+    local pkg=${1:?"no package name given"}
+    if [[ -r /usr/share/doc/$pkg/copyright ]]; then
+        $PAGER /usr/share/doc/$pkg/copyright
+    else
+        echo "No copyright file for package $pkg found"
+    fi
+}
