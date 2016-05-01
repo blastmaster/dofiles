@@ -277,6 +277,11 @@ function! ToggleTheme()
 endfunction
 
 " Mappings ---------------------------------------------------------------------
+
+" setting leader keys
+let mapleader = '\'
+let maplocalleader = ','
+
 " older maps
 " TODO: register just one key for each filetype use /usr/bin/env interpreter
 noremap <F11> i#! /bin/bash<ESC>o
@@ -285,18 +290,23 @@ noremap <F10> :noh<CR> " turn off search highlighting
 "noremap <F9> :if &background == 'dark'  <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
 noremap <F9> :call ToggleTheme()<CR>
 
-
 " editing vimrc file quickly
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" open a new tab
 nnoremap <C-t> :tabnew<CR>
+
+" insert a line of '-' dashes
+" TODO: can we use textwidth instead of setting the 80 character hardcoded?
+nnoremap <leader>ml 80i-<Esc>
 
 " setting corresponding paranthesis automatica and set cursor inside
 " TODO: These mappings should only happens in code files
 inoremap ( ()<Left>
 inoremap [ []<Left>
 " imap { {<CR><CR>}<UP>
+
 " when jumping between matches in the middle of the window
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -316,10 +326,6 @@ inoremap <c-u> <esc>mzgUiw`za
 
 " don't move on *
 nnoremap * *<c-o>
-
-" setting leader keys
-let mapleader = '\'
-let maplocalleader = ','
 
 " toggle postfix conditions in perl
 vnoremap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
