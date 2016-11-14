@@ -1,6 +1,0 @@
-#autoload -U
-#vim: set ft=zsh
-#
-# apt-get install libapp-nopaste-perl
-
-nopaste --service Gist "$@"

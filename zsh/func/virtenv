@@ -5,7 +5,6 @@
 virtenv()
 {
     emulate -L zsh
-    #source ${HOME}/virtenv/${2}/bin/activate
     local cmd=${1:?"no cmd given use activate or deactivate"}
     local venv=${2:?"no virtual env given"}
     if [[ "${cmd}" == "activate" ]]; then

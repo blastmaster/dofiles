@@ -8,14 +8,13 @@ if [ x"$HOSTNAME" = x ] ; then
         export HOSTNAME=$(hostname)
 fi
 
-
 export MANWIDTH=80
 export EDITOR=vim
 
 export RLWRAP_HOME=~/.cache/rlwrap/
 
 export LC_MESSAGES=C
-export LC_ALL=
+export LC_ALL=C
 
 # detect chroot
 [[ `stat -c %i /` -ne 2 ]] && export CHROOT=yes
@@ -25,7 +24,7 @@ export LC_ALL=
 if [ $UID -eq 0 ]; then
         PATH=~root/bin:$PATH
 else
-        path=(${HOME}/.bin:${HOME}/.local/bin $path)
+        path=(${HOME}/.bin:${HOME}/.local/bin:${HOME}/development/go/bin  $path)
 fi
 
 path=($path /bin:/usr/bin /usr/local/bin /sbin:/usr/sbin /usr/local/sbin /usr/games)
@@ -47,9 +46,19 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# these are the default arguments to exuberant-ctags
-CTAGS="--c++-kinds=+p --fields=+iaS --extra=+q"
 
-# export MPD_HOST=127.0.0.1
-# export MPD_PORT=6600
+export PAGER=less
+export VPAGER="vim -R -"
 
+# <dave0> if you use this bash function, you can do 'dpan DBD::ODBC'
+#         and it will get the debian package if it exists
+# <blastmaster> Its just a shortcut to install perl packages using the
+# perl package notation.
+function dpan () {
+    PKG=$(perl -e '$_=lc($ARGV[0]); s/::/-/g; print "lib$_-perl\n"' $1)
+    echo apt-get install $PKG
+}
+
+# print pretty calendars
+alias pcal-portrait="pcal -F 1 -m -J -p"
+alias pcal-landscape="pcal -F 1 -m -J -l"
