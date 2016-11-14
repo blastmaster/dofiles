@@ -160,7 +160,7 @@ set cursorline
 set omnifunc=syntaxcomplete#Complete
 
 " Folding
-set foldlevelstart=0    " stating with closed folds
+set foldlevelstart=99    " start with open folds
 set foldmethod=syntax
 set foldnestmax=2
 
