@@ -17,6 +17,50 @@ else
 fi
 
 setopt extended_glob
+
+if [ x"$HOME" = x ] ; then
+        export HOME=$(cd ~ ; pwd)
+fi
+
+if [ x"$HOSTNAME" = x ] ; then
+        export HOSTNAME=$(hostname)
+fi
+
+export MANWIDTH=80
+export EDITOR=vim
+export RLWRAP_HOME=~/.cache/rlwrap/
+export LC_MESSAGES=C
+export LC_ALL=C
+
+# detect chroot
+[[ `stat -c %i /` -ne 2 ]] && export CHROOT=yes
+
+# path junk
+
+if [ $UID -eq 0 ]; then
+        PATH=~root/bin:$PATH
+else
+        path=(${HOME}/.bin:${HOME}/.local/bin:${HOME}/development/go/bin  $path)
+fi
+
+path=($path /bin:/usr/bin /usr/local/bin /sbin:/usr/sbin /usr/local/sbin /usr/games)
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# this makes man pages look nicer...
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;37m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+export PAGER=less
+export VPAGER="vim -R -"
+
+# source other settings, prompt, completion, zshopts, ...
 for zshrc_snipplet in ~/.zsh/rc/S[0-9][0-9]*[^~] ; do
     source $zshrc_snipplet
 done
@@ -48,11 +92,11 @@ alias cp='cp -v'
 
 # debain depended aliases
 if [[ -f /etc/debian_version ]]; then
-    alias acs="apt-cache search"
+    alias acs="apt search"
     alias acp="apt-cache policy"
-    alias agi="sudo apt-get install"
-    alias au="sudo apt-get update"
-    alias agu="sudo apt-get upgrade"
+    alias ai="sudo apt install"
+    alias au="sudo apt update"
+    alias agu="sudo apt upgrade"
 
     alias debs-by-size="dpkg-query -Wf 'x \${Installed-Size} \${Package} \${Status}\n' | sed -ne '/^x  /d' -e '/^x \(.*\) install ok installed$/s//\1/p' | sort -nr"
 fi
