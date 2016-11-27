@@ -1,5 +1,0 @@
-#! /bin/zsh
-
-RESDIR=/tmp/ressources/
-[[ -d ${RESDIR} ]] || mkdir ${RESDIR}
-youtube-dl -o "${RESDIR}%(title)s.%(ext)s" "$@"

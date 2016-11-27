@@ -83,7 +83,7 @@ function rprompt {
     local at="${color1}@${PR_RESET}"
 
     local user_host="${color2}%n${at}${color2}%m"
-    local vcs_cwd='${${vcs_info_msg_1_%%.}/$HOME/~}'
+    local vcs_cwd="${${vcs_info_msg_1_%%.}/$HOME/~}"
     local cwd="${color2}%B%23<…<${vcs_cwd}%<<%b"
     local inner="${cwd}${colon}${user_host}"
 

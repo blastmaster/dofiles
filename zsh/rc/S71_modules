@@ -1,5 +1,0 @@
-#! /bin/zsh
-
-if [[ -f /usr/share/modules/init/zsh ]]; then
-    source  /usr/share/modules/init/zsh
-fi

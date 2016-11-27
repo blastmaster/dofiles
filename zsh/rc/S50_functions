@@ -1,6 +1,0 @@
-#!/bin/zsh
-
-# Autload every function in my .zsh/func/ directory
-for file in ~/.zsh/func/*[^~] ; do
-        autoload -U ${file##*/}
-done
