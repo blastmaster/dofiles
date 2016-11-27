@@ -411,10 +411,11 @@ highlight SyntasticStyleWarning ctermfg=118 ctermbg=233
 " clear trailing whitespaces
 nnoremap <leader>. :%s/\s\+$//<CR>:let @/=''<CR>
 
-" align text
+" align text, normal mappings
 nnoremap <leader>al :left<CR>
 nnoremap <leader>ar :right<CR>
 nnoremap <leader>ac :center<CR>
+" align text, visual mappings
 vnoremap <leader>al :left<CR>
 vnoremap <leader>ar :right<CR>
 vnoremap <leader>ac :center<CR>

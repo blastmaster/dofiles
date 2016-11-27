@@ -1,8 +1,8 @@
 [core]
 	editor = /usr/bin/vim
 [user]
-	name = blastmaster
-	email = blastmaster@tuxcode.org
+	name = Sebastian Oeste
+	email = sebastian.oeste@tu-dresden.de
 [color]
 	ui = auto
 [color "branch"]
@@ -86,6 +86,7 @@
   svnr = svn rebase
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
+	yolo = ! git commit -am \"$(curl -s whatthecommit.com/index.txt)\"
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [merge]

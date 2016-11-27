@@ -48,6 +48,8 @@ zstyle ':completion:*:*:swfplayer:*' file-patterns \
 zstyle ':completion:*' file-patterns \
     '%p:globbed-files: *(-/):directories:Directories' '*:all-files'
 
+zstyle ':completion:*' special-dirs true
+
 #[ ignores for vim ]############################################################
 
 zstyle ':completion:*:*:vi(m|):*:*files' ignored-patterns '*?.(aux|dvi|ps|pdf|bbl|toc|lot|lof|o|cm?)'
