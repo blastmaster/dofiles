@@ -73,7 +73,7 @@ set matchtime=3
 set showcmd
 " show my current mode
 set showmode
-" jumb to bracket if one is insetered
+" jumb to bracket if one is inserted
 set showmatch
 " which directory to use for the file browser (current buffer)
 set browsedir=buffer
@@ -104,7 +104,7 @@ let g:tex_flavor="pdftex"
 set ignorecase
 
 set autowrite	" write contents of the file if it has been modified
-set autoread	" read contents of the fiel if it has been modified out side of vim
+set autoread	" read contents of the file if it has been modified out side of vim
 " search options
 " ignore case for search commands
 set smartcase
@@ -126,10 +126,10 @@ set noerrorbells
 " wildmenu completion
 set wildmenu
 set wildmode=longest:full
-set wildignore+=.git,.svn,.hg						" Version Control
-set wildignore+=*.aux,*.toc,*.toc					"LateX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg		"binary images
-set wildignore+=*.o,*.so,*.class					"compiled object files
+set wildignore+=.git,.svn,.hg                       " Version Control
+set wildignore+=*.aux,*.toc,*.toc                   " LateX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg      " Binary images
+set wildignore+=*.o,*.so,*.class                    " compiled object files
 
 " timeouts
 " timeout only for for keycodes after 10 milliseconds
@@ -139,7 +139,8 @@ set ttimeoutlen=10
 
 " backups
 set nobackup
-set noswapfile		" it's the 21th century, we use version control for this
+" it's the 21th century, we use version control for this
+set noswapfile
 
 " always show a statusline
 set laststatus=2
@@ -301,17 +302,9 @@ nnoremap <C-t> :tabnew<CR>
 " TODO: can we use textwidth instead of setting the 80 character hardcoded?
 nnoremap <leader>ml 80i-<Esc>
 
-" setting corresponding paranthesis automatica and set cursor inside
-" TODO: These mappings should only happens in code files
-inoremap ( ()<Left>
-inoremap [ []<Left>
-" imap { {<CR><CR>}<UP>
-
 " when jumping between matches in the middle of the window
 nnoremap n nzzzv
 nnoremap N Nzzzv
-" nnoremap n nzz
-" nnoremap N Nzz
 
 " same when jumping through changelist
 nnoremap g; g;zz
@@ -326,9 +319,6 @@ inoremap <c-u> <esc>mzgUiw`za
 
 " don't move on *
 nnoremap * *<c-o>
-
-" toggle postfix conditions in perl
-vnoremap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
 
 "NERDCommenter settings
 nnoremap <leader>cc :NERDComComment
@@ -460,8 +450,6 @@ noremap _ <C-w>-
 " go to next split
 noremap <leader>w <C-w>w
 
-" noremap <leader>t :TlistToggle<CR>
-
 " easier split naviagation
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
@@ -569,9 +557,6 @@ EOD
     endif
 endfunction
 
-" disable cursorline if current file is *.tex or *.txt
-autocmd BufEnter *.tex set nocursorline
-autocmd BufEnter *.txt set nocursorline
 autocmd BufEnter *.t set filetype=perl
 autocmd BufEnter *.json set filetype=javascript
 

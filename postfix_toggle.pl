@@ -1,5 +1,9 @@
 #! /usr/bin/perl
 
+# To use, insert this in your .vimrc
+# toggle postfix conditions in perl
+# vnoremap <leader>f :! ~/.bin/postfix_toggle.pl<CR>
+
 use strict;
 use warnings;
 
