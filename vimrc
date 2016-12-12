@@ -16,18 +16,18 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'jceb/vim-orgmode'
-Plugin 'tpope/vim-speeddating'
-Plugin 'vim-scripts/utl.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'gabrielelana/vim-markdown'
+Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()
 
@@ -337,12 +337,16 @@ nnoremap <leader>ci :NERDComInvertComment
 nnoremap <leader>cA :NERDComAppendComment
 nnoremap <leader>cs :NERDComSexyComment
 
+" vim-markdown settings
+" conceal italics, bold, inline code and links
+let g:markdown_enable_conceal = 1
+
 " CtrlP settings
 let g:ctrlp_map = '<leader>fs'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_extensions = ['buffertag']
-let g:ctrlp_by_filename = 1					" search for filenames instead of full paths
-let g:ctrlp_tabpage_position = 'ac'			" open tab after the current one
+let g:ctrlp_by_filename = 1                 " search for filenames instead of full paths
+let g:ctrlp_tabpage_position = 'ac'         " open tab after the current one
 nnoremap <leader>fb :CtrlPBuffer<CR>
 nnoremap <leader>fm :CtrlPMRU<CR>
 nnoremap <leader>tb :CtrlPBufTag<CR>
@@ -353,6 +357,11 @@ let g:UltiSnipsExpandTrigger="<F2>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" ack.vim
+" using ag silver searcher if possible
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 " searching lefthand word with ack.vim
 nnoremap <leader>a :LAck<CR>
 
