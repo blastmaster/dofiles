@@ -82,8 +82,8 @@ alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
 alias svim="sudo HOME=/home/blastmaster vim -u /home/blastmaster/.vimrc"
+alias snvim="sudo HOME=/home/blastmaster nvim -u /home/blastmaster/.config/nvim/init.vim"
 alias powertop="sudo powertop"
-alias aiccu="sudo aiccu"
 
 alias e="exit"
 alias :q="exit"
@@ -98,11 +98,12 @@ if [[ -f /etc/debian_version ]]; then
     alias au="sudo apt update"
     alias agu="sudo apt upgrade"
 
+    # list installed packages sorted by size
     alias debs-by-size="dpkg-query -Wf 'x \${Installed-Size} \${Package} \${Status}\n' | sed -ne '/^x  /d' -e '/^x \(.*\) install ok installed$/s//\1/p' | sort -nr"
 fi
 
 # who was logged in and how often
-alias laststats="last|sed 's/ .*//'|sort|uniq -c|sort -n -r|less"
+alias laststats="last|sed 's/ .*//'|sort|uniq -c|sort -nr|less"
 
 # HASHES
 # system stuff
