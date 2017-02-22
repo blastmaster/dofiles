@@ -28,6 +28,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'latex-box-team/latex-box'
 
 call vundle#end()
 
@@ -99,7 +100,7 @@ set cin
 " setting program used for the :grep command
 set grepprg=grep\ -nH\ $*
 " latex suite option
-let g:tex_flavor="pdftex"
+"let g:tex_flavor="pdftex"
 " be case insensetive
 set ignorecase
 
