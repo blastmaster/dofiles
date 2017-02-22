@@ -409,28 +409,6 @@ let g:tagbar_indent = 1
 let g:tagbar_singleklick = 1
 nnoremap <leader>t :TagbarToggle<CR>
 
-" orgmode settings {{{
-let g:org_todo_keywords = [ 'TODO', '|', 'PROGRESS', 'DONE' ]
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':weight bold']], ['PROGRESS', [':foreground yellow', 'weight bold']], ['DONE', [':foreground green', ':weight bold']]]
-"let g:org_agenda_files = ['~/org/agenda.org']
-let g:org_agenda_files = ['~/org/*.org']
-" disable org indent
-let g:org_indent = 0
-" }}}
-
-" utl settings {{{
-" set utl media type handler for pdf
-if $DISPLAY != '' || has('gui_running')
-    for pdfviewer in [ 'okular', 'zathura', 'evince' ]
-        let pdfviewer = '/usr/bin/'.pdfviewer
-        if filereadable(pdfviewer)
-            let g:utl_cfg_hdl_mt_application_pdf = 'silent! '.pdfviewer.' "%p" &'
-            break
-        endif
-    endfor
-endif
-"}}}
-
 " YouCompleteMe setttings {{{
 nnoremap <leader>gd :YcmCompleter GoTo<CR>
 
