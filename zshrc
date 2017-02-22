@@ -90,6 +90,8 @@ alias :q="exit"
 
 alias cp='cp -v'
 
+alias nv='nvim'
+
 # debain depended aliases
 if [[ -f /etc/debian_version ]]; then
     alias acs="apt search"
