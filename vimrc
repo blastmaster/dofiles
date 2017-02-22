@@ -307,13 +307,26 @@ endfunction
 let mapleader = '\'
 let maplocalleader = ','
 
-" older maps
 " TODO: register just one key for each filetype use /usr/bin/env interpreter
 noremap <F11> i#! /bin/bash<ESC>o
-noremap <F12> i#! /usr/bin/perl<ESC>o
+
 noremap <F10> :noh<CR> " turn off search highlighting
+
 "noremap <F9> :if &background == 'dark'  <Bar> let &background = 'light' <Bar> else <Bar> let &background = 'dark' <Bar> endif<CR>
 noremap <F9> :call ToggleTheme()<CR>
+
+" include visual line marking 100 characters
+set colorcolumn=100
+nnoremap <F4> :if &colorcolumn == 100<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=100<Bar>endif<CR>
+
+" toggle tabline
+noremap <F6> :if &showtabline == 1<Bar>set showtabline=0<Bar>else<Bar>set showtabline=1<Bar>endif<CR>
+" toggle syntastic
+noremap <F5> :SyntasticToggleMode<CR>
+" toggle linenumbers
+noremap <F8> :set number!<CR>
+" toggle cursorline
+nnoremap <F3> :set cursorline!<CR>
 
 " editing vimrc file quickly
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -458,21 +471,9 @@ hi ExtraWhitespace2 ctermbg=gray guibg=red
 match ExtraWhitespace /^\t*\zs \+/
 match ExtraWhitespace2 /\s\+$\| \+\ze\t/
 
-" include visual line marking 100 characters
-if v:version >= 703
-    set colorcolumn=100
-    nnoremap <F4> :if &colorcolumn == 100<Bar>set colorcolumn=0<Bar>else<Bar>set colorcolumn=100<Bar>endif<CR>
-endif
 
-" toggle tabline
-noremap <F6> :if &showtabline == 1<Bar>set showtabline=0<Bar>else<Bar>set showtabline=1<Bar>endif<CR>
-" toggle linenumbers
-noremap <F5> :set number!<CR>
-" toggle cursorline
-nnoremap <F3> :set cursorline!<CR>
-nnoremap <F7> :call Prove()<CR>
-" nmap <F8> :call Compile()<CR>
-nnoremap <C-h> :new %:p:r.h
+" create new vertical split window
+nnoremap <C-n> :vnew<CR>
 
 " resize horizontal split
 noremap + <C-w>+
