@@ -8,6 +8,9 @@
 set guioptions=acit
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
 
+" colorscheme
+colorscheme mygithub
+
 let s:fontpattern = '^\([^0-9]\+\)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
 let s:maxfontsize = 16
