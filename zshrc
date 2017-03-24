@@ -29,8 +29,9 @@ fi
 export MANWIDTH=80
 export EDITOR=vim
 export RLWRAP_HOME=~/.cache/rlwrap/
-export LC_MESSAGES=C
-export LC_ALL=C
+export LC_MESSAGES=C.UTF-8
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 
 # detect chroot
 [[ `stat -c %i /` -ne 2 ]] && export CHROOT=yes
