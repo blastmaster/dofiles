@@ -40,10 +40,10 @@ export LC_ALL=C
 if [ $UID -eq 0 ]; then
         PATH=~root/bin:$PATH
 else
-        path=(${HOME}/.bin:${HOME}/.local/bin:${HOME}/development/go/bin  $path)
+        PATH=${HOME}/.local/bin:${HOME}/code/go/bin:${PATH}
 fi
 
-path=($path /bin:/usr/bin /usr/local/bin /sbin:/usr/sbin /usr/local/sbin /usr/games)
+PATH=${PATH}:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
