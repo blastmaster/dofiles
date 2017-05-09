@@ -157,6 +157,14 @@ own() {
     fi
 }
 
+# Clone a git repository, cd into that repository.
+# Execute cloc to get some statistics.
+clone() {
+    git clone "${1:?"clone <GIT_CLONE_URL>"}"
+    cd ${${1%%.git}##*/}
+    cloc ./
+}
+
 # apt-get install libapp-nopaste-perl
 gist() { nopaste --service Gist "$@" }
 
