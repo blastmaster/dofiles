@@ -6,9 +6,9 @@
 [color]
 	ui = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+  current = green bold
+  local = white bold
+  remote = yellow bold
 [color "diff"]
   meta = yellow bold
   frag = magenta bold
@@ -31,7 +31,6 @@
 
   # checkout
   co = checkout                     # checkout
-  nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
 
   # cherry-pick
   cp = cherry-pick -x               # grab a change from a branch
@@ -39,33 +38,23 @@
   # diff
   d = diff                          # diff unstaged changes
   dc = diff --cached                # diff staged changes
-  last = diff HEAD^                 # diff last committed change
 
   # log
   log = log --decorate --graph --date=short
   l = log
-  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  last = log --stat -1
+  ls = log --stat
+  changes = log --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-  changelog = log --pretty=format:\" * %s\"
-  shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
-
-  # pull
-  pl = pull                         # pull
-
-  # push
-  ps = push                         # push
+  changelog = log --pretty=format:\" %C(white bold) * [%ad]%Creset %C(green)%s%Creset\"
 
   # rebase
   rc = rebase --continue            # continue rebase
   rs = rebase --skip                # skip rebase
 
-  # remote
-  r = remote -v                     # show remotes (verbose)
-
   # reset
-  unstage = reset HEAD              # remove files from index (tracking)
-  uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
-  filelog = log -u                  # show changes to a file
+  unstage = reset HEAD --           # remove files from index (tracking)
+  #uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
   mt = mergetool                    # fire up the merge tool
 
   # stash
@@ -86,9 +75,11 @@
   svnr = svn rebase
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
-	yolo = ! git commit -am \"$(curl -s whatthecommit.com/index.txt)\"
+
+  # yolo
+  yolo = ! git commit -am \"$(curl -s whatthecommit.com/index.txt)\"
 [format]
-  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+  pretty = format:%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %C(white bold)%s %C(green bold)(%ar)%Creset %C(blue bold)[%an]%Creset
 [merge]
   summary = true
   verbosity = 1
