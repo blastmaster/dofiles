@@ -130,10 +130,18 @@ if [[ -f ${HOME}/perl5/perlbrew/etc/bashrc ]]; then
     source ${HOME}/perl5/perlbrew/etc/bashrc
 fi
 
+# useful functions
+
+# search for a file
 ff() { /usr/bin/find . -iname "*$@*" 2>/dev/null }
+# open file in browser
 browse() { $BROWSER file://"$(pwd)/$1" }
+# backup
 bak() { cp -a "$1" "${1}_$(date --iso-8601=seconds)" }
+# go to doc directory $1 is a pkg-name
 doc() { cd /usr/share/doc/$1 }
+# lock screen
+lock() { i3lock -t -i ~/Pictures/prometheus.png }
 # function for suspending computer, but suspend is a shell builtin?!??
 #suspend() {
     #sudo echo "suspending _" && (sudo acpitool -s & xtrlock)
@@ -159,11 +167,35 @@ own() {
 
 # Clone a git repository, cd into that repository.
 # Execute cloc to get some statistics.
-clone() {
-    git clone "${1:?"clone <GIT_CLONE_URL>"}"
+clone()
+{
+    git clone "${1:?"usage: clone <GIT_CLONE_URL>"}"
     cd ${${1%%.git}##*/}
     cloc ./
 }
+
+# Build cscope database in current directory.
+build_cscope_db()
+{
+    find ${PWD} -type f -name "*.c" \
+        -o -name "*.cc" \
+        -o -name "*.cpp" \
+        -o -name "*.h" \
+        -o -name "*.hpp" \
+        -o -name "*.H" > ${PWD}/cscope.files
+    cscope -R -b
+    export CSCOPE_DB=${PWD}/cscope.out
+}
+
+alias csbuild=build_cscope_db
+
+# Export CSCOPE_DB environment variable set to ${PWD}/cscope.out
+export_cscope_db()
+{
+    export CSCOPE_DB=${PWD}/cscope.out
+}
+
+alias csexport=export_cscope_db
 
 # apt-get install libapp-nopaste-perl
 gist() { nopaste --service Gist "$@" }
