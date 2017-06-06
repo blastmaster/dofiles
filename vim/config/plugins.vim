@@ -20,6 +20,7 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'latex-box-team/latex-box'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 
@@ -33,6 +34,9 @@ nnoremap <leader>cs :NERDComSexyComment
 " vim-markdown settings
 " conceal italics, bold, inline code and links
 let g:markdown_enable_conceal = 1
+
+" gruvbox settings
+let g:gruvbox_contrast_dark = 'medium'
 
 " CtrlP settings
 let g:ctrlp_map = '<leader>fs'
