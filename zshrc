@@ -3,6 +3,10 @@
 zsh_cache=~/.zsh/cache
 mkdir -p $zsh_cache
 
+if [ -e /home/soeste/.nix-profile/etc/profile.d/nix.sh ]; then 
+    . /home/soeste/.nix-profile/etc/profile.d/nix.sh;
+fi
+
 # Use modern completion system
 autoload -Uz compinit zrecompile
 
