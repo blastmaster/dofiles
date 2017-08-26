@@ -7,6 +7,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
@@ -21,6 +22,7 @@ Plugin 'gabrielelana/vim-markdown'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'latex-box-team/latex-box'
 Plugin 'morhetz/gruvbox'
+Plugin 'rdnetto/YCM-Generator'
 
 call vundle#end()
 
