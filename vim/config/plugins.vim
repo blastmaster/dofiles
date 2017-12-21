@@ -1,28 +1,37 @@
 
 call vundle#begin()
 
+" Utility
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim' "TODO needs python2
+Plugin 'tpope/vim-surround'
+" Development
+Plugin 'majutsushi/tagbar'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive'
+Plugin 'w0rp/ale'
+"Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'gabrielelana/vim-markdown'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'latex-box-team/latex-box'
+" Appereance
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'morhetz/gruvbox'
-Plugin 'rdnetto/YCM-Generator'
+Plugin 'NLKNguyen/papercolor-theme'
+" Projectmanagement
+Plugin 'vimwiki/vimwiki'
+Plugin 'tbabej/taskwiki'
+Plugin 'mattn/calendar-vim'
 
 call vundle#end()
 
@@ -91,11 +100,11 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " }}}
 
 " syntastic syntax
-let syntastic_enable_signs = 1
-highlight SyntasticError        ctermfg=197 ctermbg=233
-highlight SyntasticWarning      ctermfg=220 ctermbg=233
-highlight SyntasticErrorSign    ctermfg=197 ctermbg=233
-highlight SyntasticErrorLine    ctermfg=118 ctermbg=233
-highlight SyntasticWarningLine  ctermfg=118 ctermbg=233
-highlight SyntasticStyleError   ctermfg=197 ctermbg=233
-highlight SyntasticStyleWarning ctermfg=118 ctermbg=233
+"let syntastic_enable_signs = 1
+"highlight SyntasticError        ctermfg=197 ctermbg=233
+"highlight SyntasticWarning      ctermfg=220 ctermbg=233
+"highlight SyntasticErrorSign    ctermfg=197 ctermbg=233
+"highlight SyntasticErrorLine    ctermfg=118 ctermbg=233
+"highlight SyntasticWarningLine  ctermfg=118 ctermbg=233
+"highlight SyntasticStyleError   ctermfg=197 ctermbg=233
+"highlight SyntasticStyleWarning ctermfg=118 ctermbg=233

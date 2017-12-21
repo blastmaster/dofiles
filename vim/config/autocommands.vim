@@ -13,5 +13,4 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <=  line("$") | exe "nor
 " close vim if nerdtree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " file types
-autocmd BufEnter *.t set filetype=perl
 autocmd BufEnter *.json set filetype=javascript

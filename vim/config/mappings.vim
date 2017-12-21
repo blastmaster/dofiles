@@ -20,9 +20,6 @@ nnoremap <F3> :set cursorline!<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" open a new tab
-nnoremap <C-t> :tabnew<CR>
-
 " insert a line of '-' dashes
 " TODO: can we use textwidth instead of setting the 80 character hardcoded?
 nnoremap <leader>ml 80i-<Esc>
