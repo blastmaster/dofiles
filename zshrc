@@ -248,3 +248,39 @@ if [[ -f /etc/debian_version ]]; then
 fi
 
 compinit
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
+# search command history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf-tmux -d --no-sort --tac | sed 's/ *[0-9]* *//')
+}
+
+# search for tmux-sessions
+tm() {
+    local session
+    session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf-tmux -d -q "$*" --select-1 --exit-0)
+    [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+    [[ -n "$session" ]] && tmux $change -t $session || tmux
+}
+
+# search .viminfo history
+vh() {
+  local files
+  files=$(grep --color=never '^>' ~/.viminfo | cut -c3- |
+          while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+          done | fzf-tmux -d -m -q "$*" -1) && cd ${${files//\~/$HOME}%/*}; vim ${files//\~/$HOME}
+}
+
+# search vim-wiki files in ~/vimwiki/*.wiki
+vw() {
+    local wikipages
+    IFS=$'\n' wikipages=( \
+        $(find ~/vimwiki -type f -not -path "*.git/*" -and -name "*.wiki" | \
+        fzf-tmux -d -m -q "$*" --select-1 --exit-0) \
+    )
+    [[ -n "$wikipages" ]] && ${EDITOR:-vim} "${wikipages[@]}"
+}
