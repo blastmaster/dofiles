@@ -99,13 +99,6 @@ alias nv='nvim'
 
 # debain depended aliases
 if [[ -f /etc/debian_version ]]; then
-    alias acs="apt search"
-    alias acp="apt-cache policy"
-    alias ai="sudo apt install"
-    alias au="sudo apt update"
-    alias agu="sudo apt upgrade"
-
-    # list installed packages sorted by size
     alias debs-by-size="dpkg-query -Wf 'x \${Installed-Size} \${Package} \${Status}\n' | sed -ne '/^x  /d' -e '/^x \(.*\) install ok installed$/s//\1/p' | sort -nr"
 fi
 
@@ -284,3 +277,31 @@ vw() {
     )
     [[ -n "$wikipages" ]] && ${EDITOR:-vim} "${wikipages[@]}"
 }
+
+if [[ -f /etc/debian_version ]]; then
+    # apt search and show using fzf, select multiple packages is supported
+    acs() {
+        local packages
+        packages=( \
+            $(apt-cache search "$*" | fzf-tmux -m -d -q "$*" --select-1 --exit-0 | cut -d" " -f1) \
+        )
+        [[ -n "$packages" ]] && apt-cache show "${packages[@]}"
+    }
+
+    # apt search and policy using fzf, select multiple packages is supported
+    acp() {
+        local packages
+        packages=( \
+            $(apt-cache search "$*" | fzf-tmux -m -d -q "$*" --select-1 --exit-0 | cut -d" " -f1) \
+        )
+        [[ -n "$packages" ]] && apt-cache policy "${packages[@]}"
+    }
+
+    # apt search and install using fzf, select multiple packages is supported
+    asi() {
+        local packages=( \
+            $(apt-cache search "$*" | fzf-tmux -m -d -q "$*" --select-1 --exit-0 | cut -d" " -f1) \
+        )
+        [[ -n "$packages" ]] && sudo apt install "${packages[@]}"
+    }
+fi
