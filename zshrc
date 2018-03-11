@@ -38,7 +38,8 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
 # detect chroot
-[[ `stat -c %i /` -ne 2 ]] && export CHROOT=yes
+# This does not work my inode of / is greater than 2.
+#[[ `stat -c %i /` -ne 2 ]] && export CHROOT=yes
 
 # path junk
 
