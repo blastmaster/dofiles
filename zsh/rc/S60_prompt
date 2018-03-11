@@ -105,6 +105,10 @@ else
             lprompt '' $PR_BRIGHT_BLACK $PR_BRIGHT_BLUE
             rprompt '' $PR_BRIGHT_GREEN $PR_BRIGHT_BLACK
             ;;
+        prometheus*)
+            lprompt '{}' $PR_BRIGHT_BLACK $PR_WHITE
+            rprompt '()' $PR_BRIGHT_BLACK $PR_BRIGHT_BLACK
+            ;;
 
         *)
             lprompt '{}' $PR_WHITE $PR_WHITE
@@ -114,7 +118,7 @@ else
 fi
 
 if [[ -n "$debian_chroot" || -n "$CHROOT" ]]; then
-    PROMPT="$bgc%{$fg[yellow]%}%B${debian_chroot}⚘%b ${PROMPT}"
+    PROMPT="${bgc}%{$fg[yellow]%}%B${debian_chroot}⚘%b ${PROMPT}"
 fi
 
 # ------------------------------
