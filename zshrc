@@ -116,12 +116,7 @@ hash -d log=/var/log
 hash -d license=/usr/share/common-licenses
 
 # coding stuff
-hash -d dev=/home/blastmaster/development
-
-# load modules environment
-if [[ -f /usr/share/modules/init/zsh ]]; then
-    source  /usr/share/modules/init/zsh
-fi
+hash -d dev=/home/soeste/development
 
 # load perlbrew
 if [[ -f ${HOME}/perl5/perlbrew/etc/bashrc ]]; then

@@ -16,3 +16,20 @@ if [[ -z "$PATH" || "$PATH" == "/bin:/usr/bin" ]]
 then
 	export PATH="$HOME/.bin:/usr/local/bin:/usr/bin:/bin:/usr/games:"
 fi
+
+# Enable lmod
+if [ -d /etc/profile.d ]; then
+  setopt no_nomatch
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  setopt nomatch
+  done
+fi
+
+# lmod: Enable user defined modules and load default environment.
+if [ -d "$HOME/modulefiles" ]; then
+    module use "$HOME/modulefiles"
+    module restore 2>/dev/null
+fi
