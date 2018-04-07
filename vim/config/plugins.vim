@@ -13,8 +13,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'rdnetto/YCM-Generator'
+Plugin 'autozimu/LanguageClient-neovim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
@@ -90,9 +91,25 @@ let g:tagbar_singleklick = 1
 nnoremap <leader>t :TagbarToggle<CR>
 
 " YouCompleteMe setttings {{{
-nnoremap <leader>gd :YcmCompleter GoTo<CR>
+"nnoremap <leader>gd :YcmCompleter GoTo<CR>
 
-let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
 "let g:ycm_global_ycm_extra_conf = ''
 "let g:ycm_extra_conf_globlist = [ '~/dev/*' ]
 
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['/opt/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+    \ 'c':   ['/opt/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+    \ 'python':  ['/home/soeste/.local/bin/pyls', '--log-file=/tmp/pyls.log'],
+\ }
+
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath= '/home/soeste/.vim/settings.json'
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
