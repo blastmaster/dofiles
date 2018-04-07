@@ -17,7 +17,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'w0rp/ale'
-"Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'gabrielelana/vim-markdown'
@@ -97,14 +96,3 @@ let g:ycm_seed_identifiers_with_syntax = 1
 "let g:ycm_global_ycm_extra_conf = ''
 "let g:ycm_extra_conf_globlist = [ '~/dev/*' ]
 
-" }}}
-
-" syntastic syntax
-"let syntastic_enable_signs = 1
-"highlight SyntasticError        ctermfg=197 ctermbg=233
-"highlight SyntasticWarning      ctermfg=220 ctermbg=233
-"highlight SyntasticErrorSign    ctermfg=197 ctermbg=233
-"highlight SyntasticErrorLine    ctermfg=118 ctermbg=233
-"highlight SyntasticWarningLine  ctermfg=118 ctermbg=233
-"highlight SyntasticStyleError   ctermfg=197 ctermbg=233
-"highlight SyntasticStyleWarning ctermfg=118 ctermbg=233
