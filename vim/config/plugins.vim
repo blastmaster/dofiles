@@ -32,6 +32,7 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tbabej/taskwiki'
 Plugin 'mattn/calendar-vim'
+Plugin 'tpope/vim-obsession'
 
 call vundle#end()
 
