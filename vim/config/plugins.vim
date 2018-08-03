@@ -7,7 +7,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim' "TODO needs python2
+Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-surround'
 " Development
 Plugin 'majutsushi/tagbar'
@@ -96,6 +96,8 @@ nnoremap <leader>t :TagbarToggle<CR>
 "let g:ycm_seed_identifiers_with_syntax = 1
 "let g:ycm_global_ycm_extra_conf = ''
 "let g:ycm_extra_conf_globlist = [ '~/dev/*' ]
+" gundo settings
+let g:gundo_prefer_python3 = 1
 
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['/opt/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
