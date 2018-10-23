@@ -118,11 +118,6 @@ hash -d license=/usr/share/common-licenses
 # coding stuff
 hash -d dev=/home/soeste/development
 
-# load perlbrew
-if [[ -f ${HOME}/perl5/perlbrew/etc/bashrc ]]; then
-    source ${HOME}/perl5/perlbrew/etc/bashrc
-fi
-
 # useful functions
 
 # search for a file
