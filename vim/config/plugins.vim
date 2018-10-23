@@ -32,6 +32,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'tbabej/taskwiki'
 Plugin 'mattn/calendar-vim'
 Plugin 'tpope/vim-obsession'
+Plugin 'mhinz/vim-startify'
 
 call vundle#end()
 
@@ -116,3 +117,18 @@ nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" ==================== startify options ====================
+
+" save my sessions persistent
+let g:startify_session_persistence = 1
+" When opening a file change to VCS root if there is one.
+let g:startify_change_to_vcs_root = 1
+" setting startify bookmarks
+let g:startify_bookmarks = [
+    \ '~/vimwiki/index.wiki',
+    \ '~/.vimrc',
+    \ '~/.zshrc'
+    \ ]
+
+" create a new session
+nnoremap <leader>ss :SSave
