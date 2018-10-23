@@ -125,10 +125,19 @@ let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
 " setting startify bookmarks
 let g:startify_bookmarks = [
-    \ '~/vimwiki/index.wiki',
     \ '~/.vimrc',
     \ '~/.zshrc'
     \ ]
 
 " create a new session
 nnoremap <leader>ss :SSave
+
+" ==================== vimwiki options ====================
+
+let g:vimwiki_hl_headers = 1 " highlight headers with color
+
+let g:vimwiki_list = [
+    \{'path': '~/Documents/wiki/private/'},
+    \{'path': '~/Documents/wiki/phd/'},
+    \{'path': '~/Documents/wiki/knowledge_base/'}]
+
