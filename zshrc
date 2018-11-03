@@ -154,12 +154,14 @@ own() {
 }
 
 # Clone a git repository, cd into that repository.
-# Execute cloc to get some statistics.
+# Execute tokei to get some statistics.
 clone()
 {
     git clone "${1:?"usage: clone <GIT_CLONE_URL>"}"
     cd ${${1%%.git}##*/}
-    cloc ./
+    if [ -n "${commands[tokei]}" ]; then
+        tokei
+    fi
 }
 
 # Build cscope database in current directory.
