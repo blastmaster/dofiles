@@ -108,13 +108,32 @@ let g:LanguageClient_serverCommands = {
 
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath= '/home/soeste/.vim/settings.json'
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
+let g:LanguageClient_hasSnippetSupport = 0
+
+" see https://github.com/MaskRay/ccls/wiki/LanguageClient-neovim
+function C_init()
+    " use formatexpr just for language client filetypes
+    setl formatexpr=LanguageClient#textDocument_rangeFormatting()
+    "set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
+
+    " ccls specific mappings
+    " caller
+    nnoremap <silent> gc :call LanguageClient#findLocations({'method': '$ccls/call'})<CR>
+    " callee
+    nnoremap <silent> gC :call LanguageClient#findLocations({'method': '$ccls/call', 'callee':v:true})<CR>
+    " member variables / variables in a namespace
+    nnoremap <silent> gm :call LanguageClient#findLocations({'method': '$ccls/member'})<CR>
+    " inheritance
+    nnoremap <silent> gb :call LanguageClient#findLocations({'method': '$ccls/inheritance'})<CR>
+endfunction
+
+au FileType c,cpp :call C_init()
 
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
+
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " ==================== deoplete settings ====================
