@@ -109,9 +109,9 @@ let g:gundo_prefer_python3 = 1
 
 " ==================== Language Client settings ====================
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['/opt/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-    \ 'c':   ['/opt/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-    \ 'python':  ['/home/soeste/.local/bin/pyls', '--log-file=/tmp/pyls.log'],
+    \ 'cpp': ['ccls', '--log-file=/tmp/ccls.log'],
+    \ 'c':   ['ccls', '--log-file=/tmp/ccls.log'],
+    \ 'python':  ['pyls'],
 \ }
 
 let g:LanguageClient_loadSettings = 1
