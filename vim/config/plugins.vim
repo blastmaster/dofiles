@@ -1,40 +1,47 @@
 
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
 " Utility
-Plugin 'gmarik/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-surround'
 " Development
-Plugin 'majutsushi/tagbar'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'rdnetto/YCM-Generator'
-Plugin 'autozimu/LanguageClient-neovim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'w0rp/ale'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'gabrielelana/vim-markdown'
-Plugin 'latex-box-team/latex-box'
+Plug 'majutsushi/tagbar'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'rdnetto/YCM-Generator'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'tpope/vim-fugitive'
+"Plug 'w0rp/ale'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+Plug 'gabrielelana/vim-markdown'
+Plug 'latex-box-team/latex-box'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc' " required for deoplete
+    Plug 'roxma/nvim-yarp' " required for deoplete
+endif
+Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 " Appereance
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 " Projectmanagement
-Plugin 'vimwiki/vimwiki'
-Plugin 'tbabej/taskwiki'
-Plugin 'mattn/calendar-vim'
-Plugin 'tpope/vim-obsession'
-Plugin 'mhinz/vim-startify'
+Plug 'vimwiki/vimwiki'
+Plug 'tbabej/taskwiki'
+Plug 'mattn/calendar-vim'
+Plug 'tpope/vim-obsession'
+Plug 'mhinz/vim-startify'
 
-call vundle#end()
+call plug#end()
 
 " ==================== NERDCommenter settings ====================
 nnoremap <leader>cc :NERDComComment

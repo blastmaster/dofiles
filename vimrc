@@ -7,7 +7,6 @@
 set nocompatible
 
 set rtp+=~/.vim/
-set rtp+=~/.vim/bundle/Vundle.vim
 
 " setting leader keys
 let mapleader = '\'
