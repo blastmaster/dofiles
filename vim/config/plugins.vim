@@ -2,7 +2,9 @@
 call plug#begin('~/.vim/bundle')
 
 " Utility
-Plug 'ctrlpvim/ctrlp.vim'
+Plug '~/code/fzf'   " use local fzf
+"Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
@@ -55,15 +57,31 @@ let g:markdown_enable_conceal = 1
 " ==================== gruvbox settings ====================
 let g:gruvbox_contrast_dark = 'medium'
 
-" ==================== CtrlP settings ====================
-let g:ctrlp_map = '<leader>fs'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_extensions = ['buffertag']
-let g:ctrlp_by_filename = 1                 " search for filenames instead of full paths
-let g:ctrlp_tabpage_position = 'ac'         " open tab after the current one
-nnoremap <leader>fb :CtrlPBuffer<CR>
-nnoremap <leader>fm :CtrlPMRU<CR>
-nnoremap <leader>tb :CtrlPBufTag<CR>
+" ==================== fzf settings ====================
+
+" adjust fzf to my colorscheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header': ['fg', 'Comment'] }
+
+nnoremap <leader>fs :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fb :Buffer<CR>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fw :Windows<CR>
+nnoremap <leader>fh :History<CR>
+nnoremap <leader>fm :Maps<CR>
 
 " ==================== ultisnips ====================
 let g:UltiSnipsExpandTrigger="<F2>"
