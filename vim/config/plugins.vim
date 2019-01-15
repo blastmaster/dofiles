@@ -12,8 +12,6 @@ Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'rdnetto/YCM-Generator'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -98,12 +96,6 @@ let g:tagbar_indent = 1
 let g:tagbar_singleklick = 1
 nnoremap <leader>t :TagbarToggle<CR>
 
-" YouCompleteMe setttings {{{
-"nnoremap <leader>gd :YcmCompleter GoTo<CR>
-
-"let g:ycm_seed_identifiers_with_syntax = 1
-"let g:ycm_global_ycm_extra_conf = ''
-"let g:ycm_extra_conf_globlist = [ '~/dev/*' ]
 " ==================== gundo settings ====================
 let g:gundo_prefer_python3 = 1
 
