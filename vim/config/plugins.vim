@@ -116,6 +116,23 @@ nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" ==================== deoplete settings ====================
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+"" Disable the candidates in Comment/String syntaxes.
+"call deoplete#custom#source('_',
+            "\ 'disabled_syntaxes', ['Comment', 'String'])
+call deoplete#custom#source('LanguageClient',
+    \ 'min_pattern_length',
+    \ 2)
+
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " ==================== startify options ====================
 
 " save my sessions persistent
