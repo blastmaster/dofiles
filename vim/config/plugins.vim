@@ -35,7 +35,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 " Projectmanagement
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'tbabej/taskwiki'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-obsession'
@@ -121,7 +121,8 @@ let g:gundo_prefer_python3 = 1
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['ccls', '--log-file=/tmp/ccls.log'],
     \ 'c':   ['ccls', '--log-file=/tmp/ccls.log'],
-    \ 'python':  ['pyls'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'python':  ['pyls', '--log-file=/tmp/pyls.log'],
 \ }
 
 let g:LanguageClient_loadSettings = 1
