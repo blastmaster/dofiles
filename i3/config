@@ -101,6 +101,9 @@ bindsym $mod+Shift+n move scratchpad
 # show the first scratchpad window
 bindsym $mod+n scratchpad show
 
+bindsym XF86MonBrightnessUp exec brightnessctl -q set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl -q set 10%-
+
 # focus the child container
 #bindsym $mod+d focus child
 
