@@ -184,8 +184,8 @@ mode "resize" {
 bindsym $mod+Control+l exec i3lock -t -i ~/Pictures/prometheus.png
 
 # assign certain apps to specific workspaces
-assign [class="Thunderbird"] 7
-assign [class="Dino-im"] 6
+assign [class="Thunderbird"] $ws7
+assign [class="Dino-im"] $ws6
 
 bindsym $mod+r mode "resize"
 
