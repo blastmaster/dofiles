@@ -195,6 +195,7 @@ bindsym $mod+Control+l exec i3lock -t -i ~/Pictures/prometheus.png
 # assign certain apps to specific workspaces
 assign [class="Thunderbird"] $ws7
 assign [class="Dino-im"] $ws6
+assign [class="Zotero"] $ws8
 
 bindsym $mod+r mode "resize"
 
