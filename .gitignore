@@ -2,6 +2,7 @@
 .*.swn
 .*.swo
 *.*.pyc
+vim/view/*
 vim/sessions/*
 vim/bundle/*
 vim/colors/*
