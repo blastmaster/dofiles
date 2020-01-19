@@ -151,5 +151,9 @@ endfunction
 
 set foldlevelstart=1    " start with open folds
 set foldmethod=indent
+" automatically open folds only for special reasons
+set foldopen=search,insert,tag,undo,quickfix
+" do not automatically close folds
+set foldclose=
 set foldnestmax=2
 set foldtext=CustomFoldText()
