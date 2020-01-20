@@ -236,6 +236,7 @@ fi
 compinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
