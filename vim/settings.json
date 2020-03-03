@@ -1,5 +1,23 @@
 {
-        "initializationOptions": {
-                "cacheDirectory": "/tmp/ccls"
+    "initializationOptions": {
+            "cacheDirectory": "/tmp/ccls"
+    }
+    "pyls": {
+        "plugins":
+        {
+            "pyls_mypy":
+            {
+                "enabled": true,
+                "live_mode": false
+            }
+            "pydocstyle":
+            {
+                "enabled": true
+            }
+            "pyls_isort":
+            {
+                "enabled": true
+            }
         }
+    }
 }
