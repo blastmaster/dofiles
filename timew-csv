@@ -1,0 +1,16 @@
+#! /bin/bash
+
+#### timew-csv
+# This script is basically a wrapper around timew and the timew2csv.py converter.
+# The script accept a parameter e.g. today or yesterday to generate the time report.
+#
+
+TIME_REPORT_DIR="${HOME}/timereport"
+DATE_RANGE=${1:-"today"}
+
+mkdir -p "${TIME_REPORT_DIR}"
+if [[ "${DATE_RANGE}" == "today" ]]; then
+    timew export ":${DATE_RANGE#to}" | timew2csv > "${TIME_REPORT_DIR}/report-${USER}-$(date --date "${DATE_RANGE}" +%d-%m-%Y).csv"
+else
+    timew export ":${DATE_RANGE}" | timew2csv > "${TIME_REPORT_DIR}/report-${USER}-$(date --date "${DATE_RANGE}" +%d-%m-%Y).csv"
+fi
