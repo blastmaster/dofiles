@@ -29,6 +29,7 @@ if !has('nvim')
     Plug 'roxma/nvim-yarp' " required for deoplete
 endif
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
+Plug 'JuliaEditorSupport/julia-vim'
 " Appereance
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
