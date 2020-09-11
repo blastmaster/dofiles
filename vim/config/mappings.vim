@@ -1,6 +1,11 @@
 " TODO: register just one key for each filetype use /usr/bin/env interpreter
 noremap <F11> i#! /bin/bash<ESC>o
 
+" insert current date
+noremap <F1> :put=strftime('%F')<CR>
+" insert current time
+noremap <F2> :put=strftime('%R:%S')<CR>
+
 noremap <F10> :noh<CR> " turn off search highlighting
 
 " include visual line marking 100 characters
