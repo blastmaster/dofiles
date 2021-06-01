@@ -158,7 +158,7 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " ==================== deoplete settings ====================
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option({'smart_case': v:true})
 
 "" Disable the candidates in Comment/String syntaxes.
 "call deoplete#custom#source('_',
