@@ -36,7 +36,7 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 " Projectmanagement
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'tbabej/taskwiki'
+Plug 'tools-life/taskwiki'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-obsession'
 Plug 'mhinz/vim-startify'
