@@ -2,8 +2,7 @@
 call plug#begin('~/.vim/bundle')
 
 " Utility
-Plug '~/code/fzf'   " use local fzf
-"Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
