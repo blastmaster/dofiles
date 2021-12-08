@@ -75,6 +75,7 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header': ['fg', 'Comment'] }
 
+
 nnoremap <leader>fs :Files<CR>
 nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>fb :Buffer<CR>
@@ -82,6 +83,8 @@ nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fw :Windows<CR>
 nnoremap <leader>fh :History<CR>
 nnoremap <leader>fm :Maps<CR>
+nnoremap <leader>wo :Files ~/Documents/wiki/<CR>
+
 
 " ==================== ultisnips ====================
 let g:UltiSnipsExpandTrigger="<F2>"
@@ -194,9 +197,5 @@ nnoremap <leader>ss :SSave
 " ==================== vimwiki options ====================
 
 let g:vimwiki_hl_headers = 1 " highlight headers with color
-
-let g:vimwiki_list = [
-    \{'path': '~/Documents/wiki/private/'},
-    \{'path': '~/Documents/wiki/phd/'},
-    \{'path': '~/Documents/wiki/knowledge_base/'}]
+let g:vimwiki_list = [{'path': '~/Documents/wiki/'},]
 
