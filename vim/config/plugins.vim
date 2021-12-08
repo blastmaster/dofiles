@@ -125,7 +125,7 @@ let g:LanguageClient_serverCommands = {
     \ 'cpp': ['ccls', '--log-file=/tmp/ccls.log'],
     \ 'c':   ['ccls', '--log-file=/tmp/ccls.log'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'python':  ['pyls', '--log-file=/tmp/pyls.log'],
+    \ 'python':  ['/usr/bin/pyls', '--log-file=/tmp/pyls.log'],
 \ }
 
 let g:LanguageClient_loadSettings = 1
