@@ -29,6 +29,7 @@ if !has('nvim')
 endif
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'JuliaEditorSupport/julia-vim'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
 " Appereance
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
