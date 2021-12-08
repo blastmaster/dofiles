@@ -18,7 +18,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'tpope/vim-fugitive'
-"Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 Plug 'gabrielelana/vim-markdown'
@@ -170,6 +170,11 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" ==================== ale options ====================
+
+let g:ale_fixers = {'python': ['isort']}
+
 
 " ==================== startify options ====================
 
