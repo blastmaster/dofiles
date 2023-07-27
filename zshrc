@@ -97,6 +97,7 @@ alias :q="exit"
 alias cp='cp -v'
 
 alias nv='nvim'
+alias wiki='vim -c :VimwikiIndex'
 
 # debain depended aliases
 if [[ -f /etc/debian_version ]]; then
