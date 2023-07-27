@@ -46,7 +46,7 @@ export LANG=C.UTF-8
 if [ $UID -eq 0 ]; then
         PATH=~root/bin:$PATH
 else
-        PATH=${HOME}/.local/bin:${HOME}/code/go/bin:${PATH}
+        PATH=${HOME}/.local/bin:${HOME}/go/bin:${PATH}:/opt/scripts/bin
 fi
 
 PATH=${PATH}:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games
