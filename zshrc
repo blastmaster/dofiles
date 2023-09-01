@@ -160,9 +160,12 @@ lock() { i3lock -t -i ~/Pictures/prometheus.png }
     #sudo echo "suspending _" && (sudo acpitool -s & xtrlock)
 #}
 
-function url-encode; {
-        setopt extendedglob
-        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
+function urlencode() {
+    python3 -c "import sys, urllib.parse as parse; print(parse.quote(sys.argv[1]))" $1;
+}
+
+function urldecode() {
+    python3 -c "import sys, urllib.parse as parse; print(parse.quote(sys.argv[1]))" $1;
 }
 
 youtube-mplayer() {
