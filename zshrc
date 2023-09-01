@@ -22,6 +22,14 @@ fi
 
 setopt extended_glob
 
+## Completion
+autoload colors; colors;
+
+zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' insert-unambiguous yes
+zstyle ':autocomplete:*' widget-style menu-select
+zstyle -e ':autocomplete:*' list-lines 'reply=( $(( LINES / 3 )) )'
+zstyle ':completion:*:paths' path-completion yes
 if [[ -n $commands[lsd] ]]; then
     if [[ -n $commands[vivid] ]]; then
         export LS_COLORS="$(vivid generate molokai)"
