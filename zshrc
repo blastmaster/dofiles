@@ -335,3 +335,6 @@ if [[ -f /etc/debian_version ]]; then
         [[ -n "$packages" ]] && sudo apt install "${packages[@]}"
     }
 fi
+# https://github.com/zdharma-continuum/fast-syntax-highlighting.git
+[[ -f ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && source ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
