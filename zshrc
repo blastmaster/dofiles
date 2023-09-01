@@ -22,6 +22,17 @@ fi
 
 setopt extended_glob
 
+if [[ -n $commands[lsd] ]]; then
+    if [[ -n $commands[vivid] ]]; then
+        export LS_COLORS="$(vivid generate molokai)"
+    elif [[ -x dircolors ]]; then
+        eval "'dircolors'"
+        export LS_COLORS="*.ogm=01;35:${LS_COLORS}"
+        export ZLS_COLORS=$LS_COLORS
+    fi
+    alias ls="lsd --classify --date=relative"
+fi
+
 if [ x"$HOME" = x ] ; then
         export HOME=$(cd ~ ; pwd)
 fi
@@ -76,12 +87,12 @@ done
 alias du="du -hcs"
 alias df="df -h"
 
-alias l="ls --color=always -CAF"
-alias ls="ls --color=always"
-alias la="ls -la"
-alias ll='ls --color=always -lhAtrc'
-alias ltr="ls -ltr"
-alias lsfc="ls -A1|wc -l"
+#alias l="ls --color=always -CAF"
+#alias ls="ls --color=always"
+#alias la="ls -la"
+#alias ll='ls --color=always -lhAtrc'
+#alias ltr="ls -ltr"
+#alias lsfc="ls -A1|wc -l"
 
 alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
