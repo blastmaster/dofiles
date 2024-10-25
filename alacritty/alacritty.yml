@@ -1,7 +1,17 @@
 scrolling:
-  history: 0
+  history: 100000
+  #history: 0
 
 font:
+  normal:
+    family: "Hack Nerd Font Mono"
+    style: Regular
+  bold:
+    family: "Hack Nerd Font Mono"
+    style: Bold
+  italic:
+    family: "Hack Nerd Font Mono"
+    style: Italic
   size: 8.0
 
 draw_bold_text_with_bright_colors: true
@@ -92,6 +102,8 @@ cursor:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
+env:
+  TERM: xterm-256color
 
 #window:
   # Window dimensions (changes require restart)
