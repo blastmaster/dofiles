@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 
-IFACE=${IFACE:-wlp3s0}
+IFACE=${IFACE:-wlp0s20f3}
 
 # Do not display this block if the wireless interface is down.
 [[ "$(cat /sys/class/net/${IFACE}/operstate)" = "down" ]] && exit
