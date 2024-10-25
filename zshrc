@@ -3,9 +3,13 @@
 zsh_cache=~/.zsh/cache
 mkdir -p $zsh_cache
 
-if [ -e /home/soeste/.nix-profile/etc/profile.d/nix.sh ]; then 
-    . /home/soeste/.nix-profile/etc/profile.d/nix.sh;
-fi
+#if [ -e /home/soeste/.nix-profile/etc/profile.d/nix.sh ]; then
+    #. /home/soeste/.nix-profile/etc/profile.d/nix.sh;
+#fi
+
+export GUIX_PROFILE="${HOME}/.config/guix/current"
+source "${GUIX_PROFILE}/etc/profile"
+export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
 
 # Use modern completion system
 autoload -Uz compinit zrecompile
@@ -94,7 +98,7 @@ export XDG_VIDEOS_DIR="${HOME}/Videos"
 if [ $UID -eq 0 ]; then
         PATH=~root/bin:$PATH
 else
-        PATH=${HOME}/.local/bin:${HOME}/go/bin:${PATH}:/opt/scripts/bin
+    PATH="${HOME}/.config/guix/current/bin:${HOME}/.local/bin:${HOME}/go/bin:${HOME}/.cargo/bin/:/opt/scripts/bin${PATH:+:${PATH}}"
 fi
 
 PATH=${PATH}:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games
