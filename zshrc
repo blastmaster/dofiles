@@ -281,10 +281,14 @@ fi
 
 compinit
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+# Setup up fzf
+# if fzf is installed and we under debian
+if [ -n "${commands[fzf]}" ] && [ -f /etc/debian_version ]; then
+    [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+    [ -f /usr/share/doc/fzf/examples/completion.zsh ] && [[ $- == *i* ]] && source /usr/share/doc/fzf/examples/completion.zsh 2 > /dev/null
+    export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+fi
 
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 # search command history
 fh() {
@@ -302,18 +306,24 @@ tm() {
 # search .viminfo history
 vh() {
   local files
-  files=$(grep --color=never '^>' ~/.viminfo | cut -c3- |
-          while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && cd ${${files//\~/$HOME}%/*}; vim ${files//\~/$HOME}
+  files=$(grep --color=never '^>' ~/.viminfo \
+        | cut -c3- \
+        | while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "${line/\~/$HOME}"
+          done \
+        | fzf-tmux -d -m -q "$*" -1 --exit-0 --preview "batcat --color=always {-1}")
+    [[ -n "$files" ]] && cd ${files%/*} && ${EDITOR:-vim} ${files}
 }
 
-# search vim-wiki files in ~/vimwiki/*.wiki
+# search vim-wiki files in ~/vimwiki/*.wiki sorted after last modification
 vw() {
     local wikipages
     IFS=$'\n' wikipages=( \
-        $(find ~/vimwiki -type f -not -path "*.git/*" -and -name "*.wiki" | \
-        fzf-tmux -d -m -q "$*" --select-1 --exit-0) \
+        $(find ~/Documents/wiki -type f -not -path "*.git/*" -and -name "*.wiki"  -print0 \
+        | xargs -0 stat -c "%Y %y %n" \
+        | sort -rn \
+        | awk '{ printf("%s %s\n", $2, $5) }' \
+        | fzf-tmux -d -m -q "$*" --select-1 --exit-0 --preview "batcat --color=always {-1}") \
     )
     [[ -n "$wikipages" ]] && ${EDITOR:-vim} "${wikipages[@]}"
 }
@@ -345,6 +355,9 @@ if [[ -f /etc/debian_version ]]; then
         [[ -n "$packages" ]] && sudo apt install "${packages[@]}"
     }
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # https://github.com/zdharma-continuum/fast-syntax-highlighting.git
 [[ -f ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && source ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
