@@ -51,6 +51,7 @@
   changelog = log --pretty=format:\" %C(white bold) * [%ad]%Creset %C(green)%s%Creset\"
 
   # rebase
+  ri = rebase --interactive
   rc = rebase --continue            # continue rebase
   rs = rebase --skip                # skip rebase
 
@@ -104,3 +105,5 @@
   mnemonicprefix = true
 [rerere]
   enabled = true
+[init]
+	defaultBranch = main
