@@ -70,8 +70,14 @@ if [ x"$HOSTNAME" = x ] ; then
         export HOSTNAME=$(hostname)
 fi
 
+if [[ "${commands[nvim]}" ]]; then 
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
+
+export MANPAGER='nvim +Man!'
 export MANWIDTH=80
-export EDITOR=vim
 export RLWRAP_HOME=~/.cache/rlwrap/
 export LC_MESSAGES=C.UTF-8
 export LC_ALL=C.UTF-8
@@ -140,6 +146,11 @@ alias cp='cp -v'
 
 alias nv='nvim'
 alias wiki='vim -c :VimwikiIndex'
+if [[ "${commands[nvim]}" ]]; then 
+    alias vim="nvim"
+fi
+
+
 alias tin="task list +in"
 alias nautilus='GTK_THEME=Adwaita:dark nautilus'
 

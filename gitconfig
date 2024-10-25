@@ -1,10 +1,11 @@
 [core]
-	editor = /usr/bin/vim
+	editor = /usr/bin/nvim
 [user]
 	name = Sebastian Oeste
 	email = sebastian.oeste@tu-dresden.de
 [color]
 	ui = auto
+#	pager = no
 [color "branch"]
   current = green bold
   local = white bold
@@ -96,7 +97,8 @@
   default = tracking
 [core]
   autocrlf = false
-  editor = vim
+  editor = nvim
+  #pager = nvim -R
 [advice]
   statusHints = false
 [diff]
