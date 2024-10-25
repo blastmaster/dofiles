@@ -33,6 +33,7 @@ nnoremap <leader>ml 80i-<Esc>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" TODO what is the difference between changelist and jumplist?
 " same when jumping through changelist
 nnoremap g; g;zz
 nnoremap g, g,zz
@@ -41,7 +42,7 @@ nnoremap g, g,zz
 nnoremap <leader>s vip:!sort<CR>
 vnoremap <leader>s :!sort<CR>
 
-" uppercase
+" uppercase ???
 inoremap <c-u> <esc>mzgUiw`za
 
 " don't move on *
@@ -80,3 +81,8 @@ nnoremap <C-L> <C-W><C-L>
 " toggle spell checking
 nnoremap <leader>sd :set spell! spelllang=de<CR>
 nnoremap <leader>se :set spell! spelllang=en<CR>
+
+" better wayland clipboard support
+
+xnoremap <silent> <C-c>:w !wl-copy<CR><CR>
+noremap <C-c> :call system("wl-copy", @")<CR>

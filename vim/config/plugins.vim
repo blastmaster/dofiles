@@ -121,8 +121,10 @@ nnoremap <leader>t :TagbarToggle<CR>
 " ==================== airline settings ====================
 
 let g:airline_theme = 'wombat'
+let g:airline_powerline_fonts = 1
 " let g:airline_theme = 'distinguished'
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+let g:airline#extensions#tabline#buffer_nr_show = 1 " Enable tabline to show buffer numbers
 let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
 let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline
 
@@ -220,4 +222,4 @@ nnoremap <leader>ss :SSave
 
 let g:vimwiki_hl_headers = 1 " highlight headers with color
 let g:vimwiki_list = [{'path': '~/Documents/wiki/'},]
-
+set vimwiki-option-auto_tags

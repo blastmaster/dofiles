@@ -5,7 +5,7 @@ set fileencoding=utf-8
 " indent automatically
 set autoindent
 " 80 character textwidth
-set textwidth=80
+set textwidth=100
 " enable 256 colors
 set t_Co=256
 " don't try to highlight lines longer than 800 characters
@@ -62,6 +62,8 @@ set modelines=0
 set number
 " highlight search
 set hlsearch
+" highlight during typing
+set incsearch
 " C indent
 set cin
 " setting program used for the :grep command

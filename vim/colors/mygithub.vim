@@ -18,7 +18,7 @@ endif
 let g:colors_name="mygithub"
 
 " {{{ Basics
-hi Normal       ctermbg=255 ctermfg=16  guifg=#000000 guibg=#F8F8FF
+hi Normal       ctermbg=255 ctermfg=16 cterm=bold  guifg=#000000 guibg=#F8F8FF gui=bold
 hi Directory	guifg=#5785bb guibg=bg      gui=bold
 hi LineNr		guifg=#959595 guibg=#ECECEC 
 hi NonText		guifg=#808080 guibg=#ECECEC
