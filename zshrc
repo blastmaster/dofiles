@@ -367,3 +367,7 @@ fi
 # https://github.com/zdharma-continuum/fast-syntax-highlighting.git
 [[ -f ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && source ~/code/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# try powerlevel9k prompt
+# installed form debian package zsh-theme-powerlevel9k
+[[ -f /usr/share/powerlevel9k/powerlevel9k.zsh-theme ]] && source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
+
