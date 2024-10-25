@@ -20,6 +20,11 @@ else
 
 fi
 
+# source other settings, prompt, completion, zshopts, ...
+for zshrc_snipplet in ~/.zsh/rc/S[0-9][0-9]*[^~] ; do
+    source $zshrc_snipplet
+done
+
 setopt extended_glob
 
 ## Completion
@@ -39,7 +44,19 @@ if [[ -n $commands[lsd] ]]; then
         export ZLS_COLORS=$LS_COLORS
     fi
     alias ls="lsd --classify --date=relative"
+    alias ltr="lsd -ltr"
+    alias lt="lsd --tree --depth=3"
+    alias ll="lsd -lhAtr"
+else
+    alias l="ls --color=always -CAF"
+    alias ltr="ls -ltr"
+    alias ls="ls --color=always"
+    alias la="ls -la"
+    alias ll='ls --color=always -lhAtrc'
+    alias ltr="ls -ltr"
+    alias lsfc="ls -A1|wc -l"
 fi
+
 
 if [ x"$HOME" = x ] ; then
         export HOME=$(cd ~ ; pwd)
@@ -97,22 +114,10 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export PAGER=less
 export VPAGER="vim -R -"
 
-# source other settings, prompt, completion, zshopts, ...
-for zshrc_snipplet in ~/.zsh/rc/S[0-9][0-9]*[^~] ; do
-    source $zshrc_snipplet
-done
-
 # ALIASES
 
 alias du="du -hcs"
 alias df="df -h"
-
-#alias l="ls --color=always -CAF"
-#alias ls="ls --color=always"
-#alias la="ls -la"
-#alias ll='ls --color=always -lhAtrc'
-#alias ltr="ls -ltr"
-#alias lsfc="ls -A1|wc -l"
 
 alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
