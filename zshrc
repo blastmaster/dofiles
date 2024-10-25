@@ -371,6 +371,14 @@ fi
 # installed form debian package zsh-theme-powerlevel9k
 [[ -f /usr/share/powerlevel9k/powerlevel9k.zsh-theme ]] && source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 
+# bring zk binary to path; manual installed since there is no deb for that.
+if [[ -f /opt/zk/git/bin/zk ]]; then
+   export PATH=/opt/zk/git/bin${PATH:+:${PATH}}
+   ZK_NOTEBOOK_DIR=${HOME}/Documents/notes
+   [[ -f ${ZK_NOTEBOOK_DIR} ]] || mkdir -p ${ZK_NOTEBOOK_DIR}
+   export ZK_NOTEBOOK_DIR
+fi
+
 PATH="/home/soeste/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/soeste/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/soeste/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
