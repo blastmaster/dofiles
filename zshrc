@@ -334,11 +334,11 @@ vh() {
     [[ -n "$files" ]] && cd ${files%/*} && ${EDITOR:-vim} ${files}
 }
 
-# search vim-wiki files in ~/vimwiki/*.wiki sorted after last modification
+# search vim-wiki files in ~/vimwiki/*.md sorted after last modification
 vw() {
     local wikipages
     IFS=$'\n' wikipages=( \
-        $(find ~/Documents/wiki -type f -not -path "*.git/*" -and -name "*.wiki"  -print0 \
+        $(find ~/Documents/wiki -type f -not -path "*.git/*" -and -name "*.md"  -print0 \
         | xargs -0 stat -c "%Y %y %n" \
         | sort -rn \
         | awk '{ printf("%s %s\n", $2, $5) }' \
