@@ -371,3 +371,9 @@ fi
 # installed form debian package zsh-theme-powerlevel9k
 [[ -f /usr/share/powerlevel9k/powerlevel9k.zsh-theme ]] && source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 
+PATH="/home/soeste/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/soeste/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/soeste/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/soeste/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/soeste/perl5"; export PERL_MM_OPT;
+GTK_THEME="Adwaita:dark"; export GTK_THEME;
