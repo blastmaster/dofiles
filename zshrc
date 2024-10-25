@@ -134,16 +134,22 @@ alias powertop="sudo powertop"
 
 alias e="exit"
 alias :q="exit"
+alias :q!="systemctl poweroff"
 
 alias cp='cp -v'
 
 alias nv='nvim'
 alias wiki='vim -c :VimwikiIndex'
+alias tin="task list +in"
+alias nautilus='GTK_THEME=Adwaita:dark nautilus'
+
+alias aoetime='TZ=GMT+12 date "+AoE time: %Y-%m-%d %H:%M:%S"'
 
 # debain depended aliases
 if [[ -f /etc/debian_version ]]; then
     alias debs-by-size="dpkg-query -Wf 'x \${Installed-Size} \${Package} \${Status}\n' | sed -ne '/^x  /d' -e '/^x \(.*\) install ok installed$/s//\1/p' | sort -nr"
     alias bat=batcat
+    alias fd=fdfind
 fi
 
 # who was logged in and how often
