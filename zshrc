@@ -146,6 +146,8 @@ alias cp='cp -v'
 
 alias nv='nvim'
 alias wiki='vim -c :VimwikiIndex'
+alias diary='vim -c :VimwikiMakeDiaryNote'
+
 if [[ "${commands[nvim]}" ]]; then 
     alias vim="nvim"
 fi
