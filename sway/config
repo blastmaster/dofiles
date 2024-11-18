@@ -67,10 +67,10 @@ font pango:FontAwesome 10
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    #bindsym $mod+c exec wofi --gtk-dark --show drun | xargs swaymsg exec --
-    bindsym $mod+c exec GTK_THEME="Adwaita:dark" fuzzel
-    #bindsym $mod+a exec wofi --show window
+    bindsym $mod+c exec wofi --show drun --allow-markup --allow-images --insensitive --parse-search --prompt="Run"
+    bindsym $mod+a exec  "${HOME}/.config/sway/select_app.sh"
 # TODO tmux_sessions and monitor layout for wofi or fuzzel!
+
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -310,6 +310,9 @@ bindsym $mod+z exec "${HOME}/.config/sway/toggle_keyboard.sh"
 # display brightness keys
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+# search clipboard history
+bindsym $mod+Control+r exec "cliphist list | wofi -d --allow-markup --insensitive --prompt='Clipboard history'| cliphist decode 2>/dev/null | wl-copy"
 
 # TODO
 # export XDG_CURRENT_DESKTOP="${XDG_CURRENT_DESKTOP:-sway}"
