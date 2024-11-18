@@ -305,7 +305,7 @@ bar {
 #}
 
 # Toggle de/us keyboard layout
-bindsym $mod+z exec "${HOME}/.config/sway/toggle_keyboard.sh"
+bindsym $mod+Less exec "${HOME}/.config/sway/toggle_keyboard.sh"
 
 # display brightness keys
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
