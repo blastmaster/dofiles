@@ -249,6 +249,7 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Adwaita:dark'
     gsettings set $gnome-schema icon-theme 'Adwaita'
     gsettings set $gnome-schema cursor-theme 'Adwaita'
+    kanshictl reload
 }
 
 # screen locking
@@ -265,21 +266,19 @@ set $swaylock swaylock \
   --daemonize \
   --color 000000
 
+bindsym $mod+Shift+Escape exec $swaylock
+
 ### Idle configuration
 #
-# Example configuration:
-#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
          timeout 300 "$swaylock" \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
          before-sleep "$swaylock"
 
-bindsym $mod+Shift+Escape exec $swaylock
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 # Notifications
 exec swaync
@@ -308,6 +307,7 @@ bar {
 # Toggle de/us keyboard layout
 bindsym $mod+z exec "${HOME}/.config/sway/toggle_keyboard.sh"
 
+# display brightness keys
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
