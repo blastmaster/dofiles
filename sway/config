@@ -282,7 +282,7 @@ exec swayidle -w \
 
 # Notifications
 exec swaync
-bindsym $mod+y exec swaync-client -t -sw
+bindsym $mod+Control+n exec swaync-client -t -sw
 
 # Status Bar:
 bar {
