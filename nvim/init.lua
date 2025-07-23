@@ -86,3 +86,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+
+-- insert today date in the format YYYY-MM-DD
+vim.api.nvim_set_keymap("n", "<F2>", "<Cmd>put=strftime('%F')<CR>", opts)
