@@ -50,6 +50,9 @@ return {
         sources = {
             { name = 'nvim_lsp' },
             { name = 'luasnip' },
+            -- keyword_length - starting completion after 3 letters
+            -- get_bufnrs - enables suggestions from all buffers
+            { name = 'buffer', option = { keyword_length = 3, get_bufnrs = vim.api.nvim_list_bufs } },
             { name = 'path' },
         },
     }
