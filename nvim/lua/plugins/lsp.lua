@@ -1,9 +1,8 @@
-
 return {
 	'neovim/nvim-lspconfig',
     dependencies = {
-        { 'williamboman/mason.nvim', config = true },
-        'williamboman/mason-lspconfig.nvim',
+        { 'mason-org/mason.nvim', config = true },
+        {'mason-org/mason-lspconfig.nvim', commit = '1a31f824b9cd5bc6f342fc29e9a53b60d74af245'},
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         { 'j-hui/fidget.nvim', opts = {} },
     },
@@ -83,8 +82,7 @@ return {
         vim.list_extend(ensure_installed, {
             -- add some other stuff
         })
-        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+        -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
         require('mason-lspconfig').setup {
             handlers = {
                 function(server_name)
