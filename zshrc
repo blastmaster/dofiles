@@ -209,7 +209,12 @@ function urldecode() {
 
 youtube-mplayer() {
     COOKIE_FILE=/tmp/youtube-dl-cookies.txt
-    mpv -cache 9999 -cookies -cookies-file ${COOKIE_FILE} $(youtube-dl -g --cookies ${COOKIE_FILE} $*)
+    mpv \
+      --cache=yes \
+      --cookies-file="${COOKIE_FILE}" \
+      --ytdl \
+      --ytdl-format="bestvideo[ext=mp4]+bestaudio[ext=m4a]/best" \
+      "$@"
 }
 
 own() {
