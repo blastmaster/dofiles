@@ -152,6 +152,8 @@ if [[ "${commands[nvim]}" ]]; then
     alias vim="nvim"
 fi
 
+alias lg='lazygit'
+
 
 alias tin="task list +in"
 alias nautilus='GTK_THEME=Adwaita:dark nautilus'
